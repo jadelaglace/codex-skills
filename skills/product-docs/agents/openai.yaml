@@ -1,0 +1,4 @@
+interface:
+  display_name: "Product Docs"
+  short_description: "Keep product authority and delivery aligned"
+  default_prompt: "Use $product-docs to preserve user intent, isolate external advice, map the existing authority chain, and maintain delivery with proportional validation."
