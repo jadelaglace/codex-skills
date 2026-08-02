@@ -1,22 +1,34 @@
-# Architecture, Data, And Delivery Governance
+# Architecture And Data Governance
 
-Apply only the sections relevant to the product and its current lifecycle mode.
+Read this reference only when architecture, ownership, storage, provenance,
+security, recovery, repository/service topology, or an acceptance-enabling
+contract is in scope.
+
+## Keep Architecture At The Right Level
+
+Architecture should explain stable information flow, ownership, permitted
+dependencies, data authority, irreversible boundaries, and contracts required
+for acceptance. It should not become a live task plan, file inventory, framework
+comparison, or record of every reversible implementation choice.
+
+Preserve an established architecture unless evidence shows that it blocks
+acceptance, violates an authority boundary, creates material security or
+recovery risk, or no longer matches a real lifecycle or deployment boundary.
 
 ## Decision Authority
 
-Keep human authority over requirements, priorities, success, acceptance, and
-materially irreversible product, security, legal, financial, or data-authority
-choices. Agents handle reversible technical decisions, implementation, review,
-verification, evidence, and status maintenance within those boundaries.
+Keep human authority over requirements, priorities, progress judgment, success,
+final acceptance, and materially irreversible product, security, legal,
+financial, or data-authority choices. Let Agents own reversible architecture and
+implementation decisions within those boundaries.
 
-Do not make routine architecture review a permanent human approval gate.
-Escalate only when the decision materially changes the authority above or blocks
-acceptance.
+Do not make routine architecture review a permanent human gate. Escalate when a
+decision changes the authority above or blocks acceptance.
 
-## Ownership Model
+## Ownership And Writers
 
-For each meaningful data class, name one authority and its permitted writers.
-Possible classes include:
+For each meaningful data class, identify one authority and its permitted
+writers. Relevant classes may include:
 
 ```text
 source or raw evidence
@@ -27,19 +39,16 @@ runtime state
 credentials and local configuration
 ```
 
-Do not allow an adapter, consumer, model, or presentation layer to write
-canonical records without an explicit contract.
+Do not let an adapter, consumer, model, or presentation layer write canonical
+records without an explicit contract. Treat external and model-produced inputs
+as untrusted until the owning boundary validates them.
 
-## Storage Decision
+## Storage, Provenance, And Recovery
 
-Use version control when records are reviewable, reasonably sized, and benefit
-from diff, history, synchronization, and rollback.
-
-Use external storage when data is large, binary, high-churn, private, secret,
-operational, cached, indexed, logged, or transient. Protect important external
-data with suitable backup, retention, integrity checking, and recovery evidence.
-
-## Provenance Contract
+Use version control for reviewable, reasonably sized records that benefit from
+diff, history, synchronization, and rollback. Use external storage for large,
+binary, high-churn, private, secret, operational, cached, indexed, logged, or
+transient data.
 
 For transformations where traceability matters, retain the applicable subset:
 
@@ -48,36 +57,28 @@ stable input identity and source reference
 input integrity evidence
 attachment or dependency references
 processor identity and version
-processing steps, status, and limitations
+processing status and limitations
 output identity and integrity evidence
 ```
 
-Preserve source evidence according to its authority policy. Keep derivatives
-reproducible where feasible. Quarantine or clearly mark incomplete, failed,
-restricted, or provenance-free results rather than silently promoting them.
+Protect important external data with proportionate backup, retention, integrity
+checks, and recovery evidence. Mark incomplete, failed, restricted, or
+provenance-free results explicitly instead of promoting them silently.
 
-## Boundary Decisions
+## Create Boundaries Only For Real Reasons
 
-Create a repository, service, protocol, or formal handoff only when a real
-lifecycle, deployment, access, ownership, release, scale, or consumer boundary
-requires it. Do not create boundaries solely to mirror conceptual layers or a
-generic template.
+Create a repository, service, protocol, module boundary, or formal handoff only
+when a real lifecycle, deployment, access, ownership, release, scale, security,
+or consumer boundary requires it. Do not create boundaries solely to mirror a
+conceptual diagram or generic template.
 
-Keep implementation modules small, explicitly owned, and replaceable where the
-cost is reasonable. Prototype volatile behavior behind narrow contracts, then
-harden only after real use stabilizes the behavior. Language choice should
-follow maturity and evidence: optimize prototypes for feedback speed and
-ecosystem fit; reserve costly systems-level hardening for measured performance,
-safety, data-authority, or long-lived stable boundaries.
+Keep volatile behavior replaceable behind narrow contracts when the cost is
+reasonable. Harden it after real use stabilizes behavior and the added safety or
+performance benefit is demonstrated.
 
-## Delivery Cadence
-
-Within a clear scope, batch related work to reveal common patterns and then
-converge. Use immediate targeted checks for high-risk changes, shared contracts,
-and failures. Run broader gates at deliberate batch checkpoints and before
-merge, release, or acceptance.
-
-The objective is early enough fault detection without imposing a full-suite tax
-on every small edit. Increase checkpoint frequency when blast radius or failure
-signals rise; decrease it when work is repetitive, reversible, and protected by
-cheap local checks.
+Treat language, framework, library, algorithm, file layout, and local interface
+choices as implementation details unless they materially affect deployment,
+ownership, security, recovery, interoperability, long-term maintenance, or an
+acceptance-enabling contract. Optimize volatile work for feedback speed and
+ecosystem fit; reserve costly hardening for measured performance, safety,
+data-authority, or long-lived stable boundaries.
