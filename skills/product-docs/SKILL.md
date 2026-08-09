@@ -1,12 +1,14 @@
 ---
 name: product-docs
-description: Maintain concise product and system documentation with clear authority, scope, context, progress, acceptance, and architecture boundaries. Use when capturing or revising direct user intent, requirements, PRDs, plans, live status, acceptance criteria, evidence, design specifications, architecture direction, verification traceability, ownership, or human/Agent responsibilities; also use when deciding what documents to read, create, split, combine, or leave unchanged. Prioritize user intent, actual progress, and observable acceptance; load only relevant context, isolate external advice until adopted, and propagate only real semantic consequences.
+description: Maintain product and system documentation, authority, traceability, and delivery governance across discovery, definition, delivery, real-use recovery, closure, and operations. Use when defining or revising requirements, PRDs, acceptance criteria, design specifications, architecture, development process, status, test traceability, ownership, or human/Agent responsibilities. Preserve user intent, isolate external advice, map the existing authority chain, research real routes when relevant, keep multi-axis progress and evidence honest, propagate only real consequences, and use risk-based validation.
 ---
 
 # Product Docs
 
-Maintain the smallest coherent documentation context that can govern delivery.
-Use this default priority:
+Keep user intent, product behavior, acceptance, design, implementation
+boundaries, delivery status, and evidence distinct. Start from the outcome the
+user values, then maintain the smallest coherent document chain that can govern
+delivery. Use this priority when deciding what to read and what to report:
 
 ```text
 direct user intent and current requirements
@@ -19,20 +21,23 @@ direct user intent and current requirements
 Do not let downstream technical detail displace the user's purpose, current
 position, or definition of success.
 
-## Orient And Read Selectively
+## Establish Authority And Mode
 
 Before editing:
 
 1. Read local instructions and discover the repository's authority index or
    equivalent documents. Do not assume filenames, numbering, or one file per
    role.
-2. Classify the request by its highest affected role: intent/requirements,
+2. Identify the lifecycle mode: discovery, definition, delivery,
+   real-use/recovery, closure, or operations.
+3. Classify the request by its highest affected role: intent/requirements,
    product behavior, plan/progress, acceptance/evidence, architecture, design,
    or verification.
-3. Start with the smallest source set that can answer the request. Expand only
+4. Identify which decisions belong to the user and which routine work belongs
+   to Agents.
+5. Read the highest affected authority before its downstream interpretations.
+6. Start with the smallest source set that can answer the request. Expand only
    when a real semantic dependency appears.
-4. Identify the lifecycle mode. Delivery or closure work should not reopen
-   stable product definition or architecture without material cause.
 
 Use this routing guide:
 
@@ -41,15 +46,29 @@ Use this routing guide:
 | Change intent or requirements | Latest direct wording and current requirements | Product behavior and acceptance |
 | Update plan or progress | Primary live status and relevant acceptance | Verification or real-use evidence |
 | Judge completion | Acceptance criteria and completion evidence | Requirements and verification cases |
-| Change architecture direction | Requirements, acceptance, and current architecture | Governance rules, research, and implementation |
+| Research an external route | Requirements, acceptance, and route authority | Official source, tool evidence, fallback |
+| Change architecture direction | Requirements, acceptance, and current architecture | Governance, research, and implementation |
 | Repair local wording | Target section and its direct authority | Downstream roles only if meaning changed |
-| Create or reorganize documents | Authority index and neighboring roles | The full chain only when boundaries change |
+| Create or reorganize documents | Authority index and neighboring roles | Full chain only when boundaries change |
 
-Do not load every authority document merely because it exists.
+Lifecycle mode changes delivery emphasis, not product truth. A mature product in
+closure or recovery should not be pushed back into broad architecture discovery
+because a local implementation choice is imperfect.
 
-## Preserve Intent And Authority
+When sources conflict, use this order unless the repository defines a stricter
+one:
 
-Keep these categories distinct:
+```text
+latest direct user instruction
+-> current product authority
+-> explicitly adopted decision
+-> external reference
+-> implementation convenience
+```
+
+## Protect User Intent And External Boundaries
+
+Keep these categories visibly distinct:
 
 ```text
 direct user wording and value judgment
@@ -61,57 +80,142 @@ explicitly adopted decision
 
 - Treat the latest direct user instruction as higher authority than older
   requirements. Preserve genuinely open choices as open.
-- Keep current requirements readable and current; do not turn them into a
-  transcript, sprint plan, architecture inventory, or technology argument.
-- When raw wording is retained, select exact excerpts that preserve decisions,
-  values, examples, corrections, or unresolved tension. Raw evidence helps
-  detect drift; it is not a second current requirements authority.
+- Keep requirements readable and current. Do not turn them into a transcript,
+  sprint plan, architecture inventory, or technology argument.
+- Preserve concrete priorities, examples, corrections, and unresolved tension
+  when removing them would narrow what the user wants.
+- If raw wording is retained, select exact attributable excerpts that preserve
+  decisions, values, examples, or corrections. Raw evidence detects drift; it
+  is not a second current requirements authority.
+- Do not silently rewrite, translate, or attribute an Agent or AI summary to
+  the user. Keep enough date and source context to distinguish direct wording,
+  external material, and later interpretation.
 - Keep external material labeled until the user or an authorized decision
-  process adopts it.
-- Keep human authority over requirements, priorities, progress judgment,
-  success criteria, and final acceptance. Let Agents own routine documentation,
-  reversible technical decisions, implementation, verification, and evidence
-  within those boundaries.
+  process adopts it. An external language, framework, model, or workflow
+  recommendation is not a product decision by proximity.
 
 Read `references/intent-preservation.md` before accepting a new or substantially
 rewritten requirements authority.
 
-## Shape Documents And Context
+## Map And Shape The Document Chain
 
-Give each authority a clear core question. Make its purpose, exclusions,
-upstream basis, downstream consumers, and update trigger discoverable through
-its index, opening, headings, or links. Do not require a boilerplate header when
-the boundary is already clear.
+Map existing files to roles rather than forcing a numbered template. A common
+direction is:
 
-- Give each fact one primary authority. Other documents should reference or
-  interpret it rather than maintain competing copies.
+```text
+requirements / intent
+  -> product behavior or PRD
+  -> observable acceptance
+  -> interface design when applicable
+  -> architecture and ownership
+  -> delivery process and live status
+  -> verification cases and evidence
+  -> implementation
+```
+
+For each authority, make its purpose, exclusions, upstream basis, downstream
+consumers, and update trigger discoverable through an index, opening, headings,
+or links.
+
+- Give each fact one primary authority. Reference or interpret it elsewhere;
+  do not maintain competing editable copies.
+- Keep one primary source for live plan and progress.
+- Local instructions and working notes provide operational context unless the
+  repository explicitly makes them product authority.
 - Put current truth and the reader's next decision before history and detailed
-  evidence. Use appendices or supplements when history remains valuable but no
-  longer belongs in the main reading path.
-- Split documents when authority, primary reader, or update cadence forms a
-  durable boundary. Do not split merely because a file is long.
-- Keep material together when it shares authority, reader, update cadence, and
-  must be read continuously to make the decision correctly.
-- Do not combine requirements, live status, acceptance, architecture, and test
-  implementation merely to reduce file count.
-- Do not create a document, layer, identifier, or trace link that cannot prevent
-  meaningful drift or support a real decision.
+  evidence. Move useful history to a supplement when it obscures the decision
+  path.
+- Split when authority, primary reader, update cadence, reusable contract, or
+  historical evidence creates a durable independent boundary.
+- Keep material together when it shares authority, reader, and cadence and must
+  be read continuously. Do not split merely because a file is long.
+- Keep candidate plans and adopted decisions visibly different. A candidate
+  supplement cannot silently become current architecture or requirements.
+- Do not create a document, layer, identifier, trace matrix, service, or formal
+  handoff that cannot prevent meaningful drift or support a real decision.
+- Create a design specification only when a user-visible or interactive
+  interface exists; do not invent UI scope to fill a template.
 
 Read `references/document-chain.md` before creating, moving, splitting,
 combining, or substantially reorganizing authority documents.
 
-## Keep Plan, Progress, And Acceptance Honest
+## Divide Human And Agent Responsibility
 
-Maintain one primary source for live plan and progress. Requirements describe
-the outcome and constraints; acceptance defines observable success; plans and
-status describe the route and present position; verification records how claims
-were tested.
+Unless the user specifies another model, keep human authority over:
 
-Keep these claims separate:
+- requirements and priority;
+- success criteria, progress judgment, and final acceptance;
+- value judgments and scope tradeoffs;
+- irreversible choices with material product, security, legal, financial, or
+  data-authority consequences.
+
+Agents should own the routine delivery burden:
+
+- maintain affected downstream documents and live status;
+- research and compare implementation options and existing routes;
+- make reversible technical choices within established boundaries;
+- implement, review, test, and gather evidence;
+- report progress and gaps in the user's outcome language.
+
+Once the user has given a clear authorized scope, let the Agent navigate,
+collect, retry, and converge without asking for routine per-item confirmation.
+Pause and escalate for permission or semantic judgment, an ambiguous
+requirement, an irreversible boundary, a material security/data-authority risk,
+or a blocked acceptance decision. Routine architecture review is not a permanent
+human gate.
+
+## Work Broadly, Then Converge
+
+Within a clear scope and authority boundary:
+
+1. Establish the batch goal, exit condition, allowed scope, and major risks.
+2. Spread across related or repeated work to expose common patterns quickly.
+3. Use cheap targeted checks at logical boundaries and immediately after risky
+   changes, shared-contract changes, or failures.
+4. Converge the batch: resolve common defects, update evidence and status, and
+   record remaining gaps.
+5. Run broader gates before merge, release, or acceptance, and at a cadence
+   appropriate to blast radius and feedback cost.
+
+Do not hard-code a universal check count. Increase checkpoint frequency when
+data corruption, security, authority, or shared-contract risk rises; decrease it
+for repetitive, reversible work protected by cheap local checks. A status claim
+must cite the evidence threshold that permits it; update the claim and its
+supporting evidence together or make the evidence link explicit. Do not promote
+status merely because code, files, interfaces, or fixtures exist.
+
+## Research Existing Routes When Relevant
+
+When the outcome depends on importing data, integrating providers, or minimizing
+custom development, research proven existing routes before designing adapters,
+protocols, or handoff formats. Compare official APIs and exports, maintained
+tools, attainable content and metadata, authentication, re-collection behavior,
+automation suitability, limitations, and fallback.
+
+Use this preference:
+
+```text
+proven existing capability
+-> thin invocation or normalization
+-> narrow implementation for a demonstrated gap
+-> manual fallback when normal routes are unavailable
+```
+
+Record route evidence and its limitations. Search results, repository names,
+placeholder files, fixture envelopes, locator-only records, and plausible tool
+names are not real-path evidence. Keep fallback, unavailable, and disabled
+capabilities visibly distinct from the normal route. Do not turn the easiest
+fixture or fallback into the claimed product workflow. Probe the selected route
+when access and safety permit.
+
+## Keep Completion And State Honest
+
+Separate these claims:
 
 ```text
 intent documented
-work planned or scaffolded
+option or route researched
+engineering scaffold present
 mechanism tested with fixtures
 engineering boundary or gate passed
 real authorized path proven
@@ -119,50 +223,73 @@ user-visible outcome achieved
 accepted and operationally closed
 ```
 
+Do not collapse independent dimensions such as authorization, input
+completeness, registration/readiness, processing, availability, and acceptance
+into one `complete` flag. Report the dimensions that matter for the user's
+decision.
+
+For repeated or per-item work, preserve explicit `success`, `partial`,
+`skipped`, `blocked`, `retryable failed`, `unavailable`, `changed`,
+`unchanged`, `inaccessible`, and `removed` outcomes when applicable. Retry only
+the affected object, preserve successful work, and make unchanged recollection
+idempotent: it must not create a false revision, asset, or fact.
+
 Compilation, file counts, interfaces, or fixture tests cannot by themselves
-prove a product workflow complete. A local capability passing does not complete
-the whole product. Report what the user can now do, what evidence supports that
-claim, what remains, and whether the user has accepted the result.
+prove a product workflow or phase complete. Report first what the user can now
+do, what evidence supports that claim, what remains, and whether the user has
+accepted the result.
 
-Update status only when the repository's stated evidence threshold is met.
-Preserve explicit blocked, partial, deferred, unavailable, and failed outcomes
-instead of smoothing them into progress.
+## Apply Architecture And Data Governance Conditionally
 
-## Use Architecture At The Right Level
+When ownership, storage, provenance, recovery, security, repository/service
+topology, or an acceptance-enabling contract is in scope, read
+`references/governance-rules.md`.
 
-Treat architecture direction as secondary to intent, progress, and acceptance,
-but preserve it when it protects lasting boundaries. Update architecture when a
-decision materially changes data authority, permitted writers, module
-ownership, irreversible transformation, deployment or access boundaries,
-security, recovery, or a contract required for acceptance.
+Architecture should explain stable information flow, ownership, permitted
+writers, irreversible transformations, recovery boundaries, and contracts
+required for acceptance. Preserve an established architecture unless evidence
+shows that it blocks acceptance, violates an authority boundary, creates material
+security or recovery risk, or no longer matches a real lifecycle boundary.
 
-Keep reversible language, library, file-layout, algorithm, and local interface
-choices in implementation or task records unless they establish a durable
-boundary. Do not reopen stable architecture because a local implementation is
-imperfect or an external suggestion is fashionable.
+For meaningful data classes, identify one authority and its permitted writers.
+Keep raw/source evidence, canonical records, processed derivatives, published
+outputs, runtime state, and credentials distinct. Preserve source identity,
+integrity, processing identity/status, dependencies, and output integrity when
+traceability matters. Derived data, indexes, views, and outputs must be
+deletable/rebuildable without changing the authoritative source. Quarantine or
+clearly mark incomplete, failed, restricted, or provenance-free results.
 
-Read `references/governance-rules.md` when architecture, storage, provenance,
-security, recovery, repository/service topology, or data ownership is in scope.
+Create a repository, service, protocol, module boundary, or formal handoff only
+when a real lifecycle, deployment, access, ownership, release, scale, security,
+or consumer boundary requires it. Keep volatile behavior replaceable behind
+narrow contracts and harden it after real use stabilizes the behavior and the
+added safety or performance benefit is demonstrated. Language, framework,
+library, algorithm, and file layout are implementation choices unless they
+materially affect those durable boundaries.
 
-## Change And Report Deliberately
+## Change Documents Deliberately And Report Clearly
 
-1. Update the highest affected authority role first.
-2. Preserve selected direct wording only when it materially governs the result.
-3. Inspect downstream roles that could be affected.
-4. Update only changed semantics, contracts, status, or evidence. Record
-   important reviewed-but-unchanged roles instead of manufacturing edits.
-5. Validate in proportion to authority, blast radius, reversibility, and
+1. Classify the request as intent, behavior, acceptance, design,
+   architecture, delivery/status, or verification work.
+2. Update the highest affected authority role first.
+3. Preserve selected direct wording only when it materially governs the result.
+4. Inspect downstream roles that could be affected; update only changed
+   semantics, contracts, status, or evidence.
+5. Record important reviewed-but-unchanged roles instead of manufacturing edits.
+6. Validate in proportion to authority, blast radius, reversibility, and
    evidence risk. Run broader gates before merge, release, or acceptance.
-6. Report in this order:
+
+Report in this order:
 
 ```text
-whether the user's goal changed
+user goal and whether it changed
 -> current actual progress
--> evidence and remaining acceptance gap
--> whether stable architecture direction changed
+-> evidence, status dimensions, and remaining acceptance gap
+-> stable architecture direction and boundary impact
 -> changed authorities and important reviewed-but-unchanged roles
+-> unresolved decisions and next action
 ```
 
-Keep the work proportional. A progress update does not automatically rewrite
+Keep the work proportional. A delivery update does not automatically rewrite
 requirements or architecture, and a local implementation change does not
 automatically change product acceptance.
