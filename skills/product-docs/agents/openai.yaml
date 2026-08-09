@@ -1,4 +1,4 @@
 interface:
   display_name: "Product Docs"
-  short_description: "Keep requirements, progress, acceptance, and boundaries clear"
-  default_prompt: "Use $product-docs to maintain the smallest clear authority and context for this requirement, progress update, acceptance decision, or architecture change."
+  short_description: "Keep product authority and delivery aligned"
+  default_prompt: "Use $product-docs to preserve user intent, isolate external advice, map the existing authority chain, and maintain delivery with proportional validation."
