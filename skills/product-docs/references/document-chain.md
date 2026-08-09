@@ -1,7 +1,8 @@
 # Documentation Chain
 
 Discover the repository's existing authority chain and map files to roles. Do
-not rename or renumber a working chain merely to match this reference.
+not rename, renumber, split, or multiply a working chain merely to match this
+reference.
 
 ## Authority Roles
 
@@ -12,12 +13,26 @@ not rename or renumber a working chain merely to match this reference.
 | Product behavior / PRD | Who uses it and what observable behavior do they receive? | Code layout or storage internals |
 | Acceptance | What observable result proves success or failure? | Test implementation details or routine approval ceremony |
 | Design specification, when applicable | How does the interface support usable and accessible task completion? | Backend internals or invented interface scope |
-| Architecture / ownership | Which boundaries, authorities, contracts, and dependencies deliver acceptance? | Phase estimates or product intent invented for convenience |
-| Delivery process / live status | What mode, order, responsibility, risk, and evidence govern delivery now? | New product behavior |
-| Verification cases / evidence | How is each acceptance claim tested or demonstrated? | Unadopted architecture alternatives |
+| Architecture / ownership | Which lasting boundaries, authorities, contracts, and dependencies deliver acceptance? | Phase estimates or product intent invented for convenience |
+| Delivery process / live status | What mode, order, current position, risk, blocker, and evidence govern delivery now? | New product behavior or a second acceptance authority |
+| Verification cases / evidence | How is each acceptance or engineering claim tested or demonstrated? | Unadopted architecture alternatives or competing live status |
 
-Repositories may combine roles in one document or use different names. Keep
-authority direction explicit even when the files differ.
+Repositories may combine roles when their authority, reader, and update cadence
+are the same. Keep the authority direction explicit even when the files differ.
+
+## Make The Contract Discoverable
+
+For each important authority, make these facts easy to find through an index,
+opening paragraph, headings, or links:
+
+```text
+purpose and core question
+what it owns and does not own
+upstream authority
+downstream consumers
+what kind of change should update it
+whether content is current truth, live status, or historical evidence
+```
 
 ## Typical Direction
 
@@ -32,15 +47,49 @@ requirements / intent
   -> implementation
 ```
 
+## One Primary Authority And Honest Status
+
+- Store current requirements in the requirements authority.
+- Store live plan and progress in one primary status source.
+- Store observable completion criteria in acceptance.
+- Store test procedure and results in verification or evidence records.
+- Store stable ownership and data boundaries in architecture.
+- Reference or summarize these facts elsewhere without competing editable
+  copies, and make the update direction clear.
+- Keep independent dimensions such as authorization, completeness, processing,
+  readiness, availability, and acceptance separate when they affect a decision.
+- Keep candidate proposals, experiments, machine suggestions, and adopted
+  decisions visibly distinct.
+
+## Split Or Combine Deliberately
+
+Split when at least one durable boundary makes independent reading or updating
+safer:
+
+- a different decision authority owns the content;
+- a different primary reader needs it;
+- it changes at a materially different cadence;
+- history or detailed evidence obscures the current decision path;
+- one section has become a reusable contract consumed independently.
+
+Keep material together when it shares authority, reader, and cadence, and when
+splitting would force the reader to reconstruct one decision across many small
+files. Do not use line count alone as a split rule. Use headings, a concise
+current-state summary, navigation, and supplements before creating fragments.
+
+Do not merge semantically different roles merely to reduce file count. A large
+but well-navigated authority can be better than many tiny documents; a short
+file with two competing authorities can still be wrong.
+
 ## Impact-Based Propagation
 
-- Start at the highest role whose meaning changed.
-- Inspect each downstream role that could be affected.
-- Update a document only when its semantics, contract, status, or evidence
-  changed.
-- Record important reviewed-but-unchanged roles in the delivery report.
-- Never manufacture edits solely to demonstrate that the whole chain was
-  visited.
+1. Start at the highest role whose meaning changed.
+2. Inspect only downstream roles that could be affected.
+3. Update a document only when its semantics, contract, status, or evidence
+   changed.
+4. Record important reviewed-but-unchanged roles in the delivery report.
+5. Never manufacture edits solely to demonstrate that the whole chain was
+   visited.
 
 ## Raw Intent Evidence
 
@@ -75,7 +124,10 @@ Use the repository's existing identifiers and links where available. At minimum:
 - acceptance traces to product behavior;
 - architecture and design trace to the acceptance they enable;
 - delivery status cites the applicable acceptance or gate;
-- verification evidence identifies the claim it proves.
+- verification evidence identifies the claim it proves;
+- route decisions cite the evidence that makes a route normal, fallback,
+  disabled, or unavailable.
 
-Traceability should make drift visible. It should not create ceremony that
-slows small, semantically unchanged work.
+Traceability should make drift and false completion visible. Do not create an
+identifier, matrix, or link when it adds ceremony without reducing ambiguity or
+verification risk.
