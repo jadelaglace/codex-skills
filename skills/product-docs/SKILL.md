@@ -21,6 +21,47 @@ direct user intent and current requirements
 Do not let downstream technical detail displace the user's purpose, current
 position, or definition of success.
 
+## Persist New Governing Input First
+
+When new user input changes, corrects, questions, or governs ongoing work,
+persist it before searching backward, analyzing, editing implementation, or
+continuing an older plan. Classify it first so `docs-first` does not pollute the
+wrong authority:
+
+- Put product-specific intent, value judgments, corrections, and genuinely open
+  product questions in the repository's direct-wording evidence when that role
+  exists. Preserve the user's wording and keep open questions open.
+- Put an interpreted current product decision in requirements only after it is
+  actually decided; do not promote a question or an Agent recommendation.
+- Put cross-project working agreements, process corrections, and general
+  follow-up obligations at the front of the primary plan or progress control,
+  not in product requirements or product wording evidence. Propagate them to an
+  applicable shared Skill or process authority when the user requests reuse.
+- Put run facts and concrete completion state only in live status or evidence.
+
+Make the capture the first completed action, not a promise to document later.
+After context loss or compaction, resume by reading the leading active plan item
+and the newest relevant captured wording before older history. If no durable
+progress control exists, update the smallest existing planning/status artifact;
+do not create a competing authority merely to remember the instruction.
+
+Treat a plan/progress capture made only to anchor a bounded read-only request as
+a temporary execution record, not permanent product history. At the request's
+explicit terminal:
+
+1. Promote any durable decision, correction, unresolved obligation, run fact,
+   failure, or handoff evidence to its proper authority first.
+2. Delete the temporary anchor when the work succeeded, no obligation remains,
+   and deleting it loses no evidence needed for audit, recovery, or handoff.
+3. Keep and mark it terminal when the primary progress authority intentionally
+   preserves history, or when the request failed, was blocked, was interrupted,
+   or still has a follow-up obligation. Record the terminal reason.
+
+Never delete direct-wording evidence, an adopted decision, live status, or
+completion evidence merely because the task that captured it ended. Do not let
+temporary anchors accumulate as a shadow backlog, and do not delete one before
+its durable consequences have been promoted.
+
 ## Establish Authority And Mode
 
 Before assessing, reporting, or editing:
