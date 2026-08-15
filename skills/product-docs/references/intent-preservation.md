@@ -33,6 +33,8 @@ material visibly separate.
    and does unique decision evidence remain recoverable?
 10. Does the document fit the product's current lifecycle mode without turning
     a delivery or closure problem into a new product definition?
+11. If current documents or terms were renamed, were historical filenames,
+    wording, mistakes, and terminology left intact inside exact quotations?
 
 ## Failure Signals
 
@@ -58,3 +60,5 @@ acceptance -> design/architecture -> delivery -> verification -> implementation
 
 Downstream documents may refine how the system works. External references may
 inform alternatives. Neither may silently rewrite what the user asked for.
+Current navigation may annotate or map an old name to its present authority,
+but it must not modernize the quoted evidence itself.

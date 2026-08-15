@@ -4,11 +4,13 @@ Apply only the sections relevant to the product and its current lifecycle mode.
 
 ## Decision Authority
 
-Keep human authority over requirements, priorities, progress judgment, success,
-acceptance, and materially irreversible product, security, legal, financial, or
-data-authority choices. Agents handle reversible technical decisions,
-implementation, review, verification, evidence, and status maintenance within
-those boundaries.
+Keep human authority over requirements, priorities, success criteria,
+decisions about whether observed progress is sufficient, product-scope
+completion, acceptance, and materially irreversible product, security, legal,
+financial, or data-authority choices. Agents handle reversible technical
+decisions, implementation, review, verification, evidence, and evidence-backed
+measurement, reporting, and status maintenance within those boundaries.
+Maintaining observed progress does not confer product completion or acceptance.
 
 Do not make routine architecture review a permanent human approval gate.
 Escalate when a decision materially changes the authority above, creates a
@@ -66,12 +68,39 @@ promoting them.
 When importing data or integrating providers, record the route's evidence level,
 authorization requirement, normal path, fallback, limitations, and next probe.
 
+Track these axes independently when they affect a decision:
+
+```text
+route evidence maturity
+runtime capability status
+authorized user scope
+per-object execution result
+usage completion and acceptance
+```
+
+Use the repository's evidence scale when it has one. Reaching the highest
+evidence level does not automatically enable a route at runtime. For one
+runtime observation, use mutually exclusive capability states: `enabled` means
+the capability is present, intentionally on, and has no known route-level
+blocker; `disabled` means it is present but intentionally off; `absent` means it
+is not present; `unavailable` means it is present and not intentionally off,
+but a route-level operational dependency or external condition currently
+prevents use. `not-yet-probed` belongs to evidence maturity and makes no runtime
+claim. Do not use `unavailable` for a subject's authorization or an object's
+execution result. `inaccessible` belongs to authorized scope or a per-object
+execution result and must identify the blocked subject or object; do not
+promote it to a global runtime status without route-level evidence. User
+deferrals, run denominators, object results, and usage completion belong to
+scope, execution, or status records rather than the route registry.
+
 - A search result, repository name, placeholder, fixture, locator-only record,
   or plausible tool name is not real route evidence.
 - A fallback or manual recovery path does not prove the normal path.
-- Keep unavailable, disabled, inaccessible, and not-yet-probed distinct from
-  successful capability.
+- Keep evidence maturity, runtime status, authorization, and object results in
+  their respective axes instead of treating any one as successful capability.
 - Do not enable a route merely because an adapter or interface exists.
+- Reconcile any documented runtime mirror against the real command, API,
+  provider, or registry rather than letting documentation certify itself.
 - Preserve the user-visible reason and actionable gap for a failed or
   unavailable route.
 
@@ -121,3 +150,9 @@ may prove ownership, compilation, migration, or integrity without proving the
 user workflow. Increase checkpoint frequency when blast radius or failure
 signals rise; decrease it when work is repetitive, reversible, and protected by
 cheap local checks.
+
+For closure audits, map every requested outcome to its authority and evidence
+before accepting a broad green gate. A checker proves only the rules and inputs
+it covers; query the live runtime or system of record for live claims. Where a
+checker guards important authority or fail-closed behavior, use a targeted
+mutation or negative test to confirm that a deliberate defect is rejected.

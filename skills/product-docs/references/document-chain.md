@@ -61,6 +61,22 @@ requirements / intent
 - Keep candidate proposals, experiments, machine suggestions, and adopted
   decisions visibly distinct.
 
+## Reusable Behavior Versus Concrete Runs
+
+Product behavior may define reusable modes or contracts such as preview or
+dry-run, a pilot mode, a selectable template or profile, and complete processing
+of one clearly authorized scope. Define these as repeatable behavior with
+observable outcomes, not as the history of one execution.
+
+Keep concrete run facts in live status or evidence: run and batch identities,
+particular inputs, denominators, per-run counts, a particular pilot execution,
+acceptance of one generated instance, and claims that a specific scope is
+complete. Phase or roadmap
+authority defines delivery order and gates; it does not become the live source
+of completion truth. A specialized pilot instantiates the general capability
+and must not silently narrow the product or its reusable operating instructions
+to that trial.
+
 ## Split Or Combine Deliberately
 
 Split when at least one durable boundary makes independent reading or updating
@@ -131,3 +147,21 @@ Use the repository's existing identifiers and links where available. At minimum:
 Traceability should make drift and false completion visible. Do not create an
 identifier, matrix, or link when it adds ceremony without reducing ambiguity or
 verification risk.
+
+## Stable Navigation And Renames
+
+Prefer the repository's existing stable document identifiers, authority index,
+and registry when filenames or ordering may change. Introduce an identifier,
+glossary, relationship diagram, or grouped naming convention only when it makes
+authority or navigation materially clearer. Follow a locally adopted numbering
+scheme; do not impose a universal numeric or alphabetic pattern.
+
+When renaming or moving authority documents:
+
+1. Update the authority index, registry, and real links.
+2. Search for stale paths and ambiguous competing authority markers.
+3. Validate navigation from the reader's entry points, not only from the
+   renamed file.
+4. Preserve historical filenames and terms inside exact quotations or other
+   raw evidence. Explain an old name through current navigation or annotation
+   instead of rewriting the quote.

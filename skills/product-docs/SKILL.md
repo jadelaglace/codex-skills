@@ -23,7 +23,7 @@ position, or definition of success.
 
 ## Establish Authority And Mode
 
-Before editing:
+Before assessing, reporting, or editing:
 
 1. Read local instructions and discover the repository's authority index or
    equivalent documents. Do not assume filenames, numbering, or one file per
@@ -120,6 +120,11 @@ or links.
 - Give each fact one primary authority. Reference or interpret it elsewhere;
   do not maintain competing editable copies.
 - Keep one primary source for live plan and progress.
+- Keep reusable operating behavior in product authority and concrete execution
+  facts in live status or evidence. A preview/dry-run, pilot mode,
+  template/profile, or complete processing of an authorized scope can be
+  repeatable product behavior; a particular run, denominator, batch, accepted
+  instance, or completion claim is not.
 - Local instructions and working notes provide operational context unless the
   repository explicitly makes them product authority.
 - Put current truth and the reader's next decision before history and detailed
@@ -131,27 +136,32 @@ or links.
   be read continuously. Do not split merely because a file is long.
 - Keep candidate plans and adopted decisions visibly different. A candidate
   supplement cannot silently become current architecture or requirements.
+- Do not let a specialized pilot narrow the general product or Skill authority
+  to one dataset, source, customer, course, or other trial instance.
 - Do not create a document, layer, identifier, trace matrix, service, or formal
   handoff that cannot prevent meaningful drift or support a real decision.
 - Create a design specification only when a user-visible or interactive
   interface exists; do not invent UI scope to fill a template.
 
-Read `references/document-chain.md` before creating, moving, splitting,
-combining, or substantially reorganizing authority documents.
+Read `references/document-chain.md` before creating, renaming, renumbering,
+moving, splitting, combining, or substantially reorganizing authority
+documents, and before repairing their navigation.
 
 ## Divide Human And Agent Responsibility
 
 Unless the user specifies another model, keep human authority over:
 
 - requirements and priority;
-- success criteria, progress judgment, and final acceptance;
+- success criteria, decisions about whether observed progress is sufficient,
+  product-scope completion, and final acceptance;
 - value judgments and scope tradeoffs;
 - irreversible choices with material product, security, legal, financial, or
   data-authority consequences.
 
 Agents should own the routine delivery burden:
 
-- maintain affected downstream documents and live status;
+- measure, maintain, and report evidence-backed live status and observed
+  progress without promoting them to product completion or acceptance;
 - research and compare implementation options and existing routes;
 - make reversible technical choices within established boundaries;
 - implement, review, test, and gather evidence;
@@ -192,6 +202,9 @@ protocols, or handoff formats. Compare official APIs and exports, maintained
 tools, attainable content and metadata, authentication, re-collection behavior,
 automation suitability, limitations, and fallback.
 
+Read `references/governance-rules.md` before creating or revising a route
+registry, classifying route evidence, or judging runtime availability.
+
 Use this preference:
 
 ```text
@@ -229,7 +242,7 @@ into one `complete` flag. Report the dimensions that matter for the user's
 decision.
 
 For repeated or per-item work, preserve explicit `success`, `partial`,
-`skipped`, `blocked`, `retryable failed`, `unavailable`, `changed`,
+`skipped`, `blocked`, `retryable failed`, `non-retryable failed`, `changed`,
 `unchanged`, `inaccessible`, and `removed` outcomes when applicable. Retry only
 the affected object, preserve successful work, and make unchanged recollection
 idempotent: it must not create a false revision, asset, or fact.
@@ -238,6 +251,9 @@ Compilation, file counts, interfaces, or fixture tests cannot by themselves
 prove a product workflow or phase complete. Report first what the user can now
 do, what evidence supports that claim, what remains, and whether the user has
 accepted the result.
+
+Read `references/governance-rules.md` before a closure audit or an
+evidence-based claim that a scope is complete.
 
 ## Apply Architecture And Data Governance Conditionally
 
@@ -277,7 +293,10 @@ materially affect those durable boundaries.
    semantics, contracts, status, or evidence.
 5. Record important reviewed-but-unchanged roles instead of manufacturing edits.
 6. Validate in proportion to authority, blast radius, reversibility, and
-   evidence risk. Run broader gates before merge, release, or acceptance.
+   evidence risk. For live or runtime claims, reconcile documentation against
+   the real command, API, registry, or system of record. A checker proves only
+   the rules it actually covers. Run broader gates before merge, release, or
+   acceptance.
 
 Report in this order:
 
