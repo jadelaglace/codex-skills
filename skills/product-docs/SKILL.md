@@ -29,8 +29,8 @@ continuing an older plan. Classify it first so `docs-first` does not pollute the
 wrong authority:
 
 - Put product-specific intent, value judgments, corrections, and genuinely open
-  product questions in the repository's direct-wording evidence when that role
-  exists. Preserve the user's wording and keep open questions open.
+  product questions append-first and verbatim in the repository's recovery
+  evidence when that role exists. Do not clean, summarize, or promote them first.
 - Put an interpreted current product decision in requirements only after it is
   actually decided; do not promote a question or an Agent recommendation.
 - Put cross-project working agreements, process corrections, and general
@@ -41,9 +41,20 @@ wrong authority:
 
 Make the capture the first completed action, not a promise to document later.
 After context loss or compaction, resume by reading the leading active plan item
-and the newest relevant captured wording before older history. If no durable
-progress control exists, update the smallest existing planning/status artifact;
-do not create a competing authority merely to remember the instruction.
+and current intent before older history. Read verbatim recovery evidence only
+when the normal chain cannot resolve serious drift, conflict, blockage, or an
+audit/recovery question. If no durable progress control exists, update the
+smallest existing planning/status artifact; do not create a competing authority
+merely to remember the instruction.
+
+After analysis forms a conclusion that changes the remaining route, after a
+declared execution terminal, when a shared blocker invalidates downstream work,
+or before long/context-heavy work or handoff, update the corresponding active
+item with a concise Agent-attributed temporary subplan. Record the conclusion,
+next action, protected boundary, and evidence entry point—not private chain of
+thought, every command, or every local check. Use this threshold: losing the
+update would make the next Agent take a different route or repeat substantial
+work.
 
 Treat a plan/progress capture made only to anchor a bounded read-only request as
 a temporary execution record, not permanent product history. At the request's
@@ -61,6 +72,10 @@ Never delete direct-wording evidence, an adopted decision, live status, or
 completion evidence merely because the task that captured it ended. Do not let
 temporary anchors accumulate as a shadow backlog, and do not delete one before
 its durable consequences have been promoted.
+
+Read `references/intent-plan-lifecycle.md` before creating or substantially
+changing current-intent, verbatim-recovery, active-plan, or progress-control
+roles, and before designing their curation, size, status, or terminal cleanup.
 
 ## Establish Authority And Mode
 
