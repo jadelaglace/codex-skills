@@ -4,6 +4,14 @@ Discover the repository's existing authority chain and map files to roles. Do
 not rename, renumber, split, or multiply a working chain merely to match this
 reference.
 
+## Contents
+
+- Authority roles and contract discovery
+- Typical direction and one-primary-authority rules
+- Reusable behavior versus concrete runs
+- Split/combine, impact propagation, and raw intent evidence
+- Interface design, traceability, navigation, and renames
+
 ## Authority Roles
 
 | Role | Must answer | Must not silently become |

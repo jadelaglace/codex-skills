@@ -2,6 +2,14 @@
 
 Apply only the sections relevant to the product and its current lifecycle mode.
 
+## Contents
+
+- Decision authority and permitted writers
+- Storage, provenance, recovery, and route availability
+- State, retry, and idempotency
+- Boundary decisions and progressive hardening
+- Delivery cadence and gates
+
 ## Decision Authority
 
 Keep human authority over requirements, priorities, success criteria,

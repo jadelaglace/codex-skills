@@ -174,25 +174,52 @@ requirement, an irreversible boundary, a material security/data-authority risk,
 or a blocked acceptance decision. Routine architecture review is not a permanent
 human gate.
 
-## Work Broadly, Then Converge
+## Run Coherent Rounds, Then Converge
 
-Within a clear scope and authority boundary:
+Use an execution round when repeated or multi-stage delivery would otherwise be
+fragmented by per-item checks. Keep narrow, reversible work proportional; do not
+add round machinery when one edit and one relevant check already reach the real
+terminal.
 
-1. Establish the batch goal, exit condition, allowed scope, and major risks.
-2. Spread across related or repeated work to expose common patterns quickly.
-3. Use cheap targeted checks at logical boundaries and immediately after risky
-   changes, shared-contract changes, or failures.
-4. Converge the batch: resolve common defects, update evidence and status, and
-   record remaining gaps.
-5. Run broader gates before merge, release, or acceptance, and at a cadence
+Before a round, freeze:
+
+- the authorized scope or denominator and input identity;
+- the intended terminal, stage sequence, and acceptance matrix;
+- the implementation and configuration identity used by the round;
+- the small set of risks that invalidate the round immediately.
+
+During the round, treat checkpoints as observations, not automatic repair gates.
+Record non-invalidating defects and continue all independent work to explicit
+terminal states. Fail fast only when continuing risks data loss or irrecoverable
+change, crosses authority or authorization, creates a material security issue,
+detects frozen-input drift, or makes downstream evidence untrustworthy. A
+fail-closed item, package, or branch does not stop unrelated work unless the
+failure is shared and invalidating.
+
+At the declared terminal:
+
+1. Evaluate the whole acceptance matrix once and record every stage and item as
+   succeeded, failed, skipped, blocked, or another explicit terminal state.
+2. Produce one defect ledger and preserve the actual terminal, evidence, and
+   gaps without promoting the round to completion.
+3. Cluster defects by root cause, owner, and blast radius; form a bounded repair
+   set instead of patching each symptom as it appears.
+4. Use targeted checks during repair for fast feedback. These checks prove the
+   repair, not the batch, phase, release, or user outcome.
+5. After implementation, configuration, input, or acceptance changes, start a
+   new round from clean staging and run to the same terminal. Resume an existing
+   round only when its frozen state is unchanged.
+6. Run broader gates before merge, release, closure, or acceptance at a cadence
    appropriate to blast radius and feedback cost.
 
-Do not hard-code a universal check count. Increase checkpoint frequency when
-data corruption, security, authority, or shared-contract risk rises; decrease it
-for repetitive, reversible work protected by cheap local checks. A status claim
-must cite the evidence threshold that permits it; update the claim and its
-supporting evidence together or make the evidence link explicit. Do not promote
-status merely because code, files, interfaces, or fixtures exist.
+Keep checkpoint, repair-test, terminal-gate, and user-acceptance evidence
+distinct. Do not hard-code a universal check count. Increase observation
+frequency when data corruption, security, authority, or shared-contract risk
+rises; decrease it for repetitive, reversible work protected by cheap checks.
+A status claim must cite the terminal evidence threshold that permits it; update
+the claim and supporting evidence together or link them explicitly. Do not
+promote status merely because code, files, interfaces, fixtures, or targeted
+tests exist.
 
 ## Research Existing Routes When Relevant
 
