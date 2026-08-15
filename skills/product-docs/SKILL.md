@@ -34,18 +34,41 @@ wrong authority:
 - Put an interpreted current product decision in requirements only after it is
   actually decided; do not promote a question or an Agent recommendation.
 - Put cross-project working agreements, process corrections, and general
-  follow-up obligations at the front of the primary plan or progress control,
-  not in product requirements or product wording evidence. Propagate them to an
-  applicable shared Skill or process authority when the user requests reuse.
+  follow-up obligations in the primary plan or progress control, not in product
+  requirements or product wording evidence. If the input changes the running
+  route, update the current item; otherwise insert it at the top of a bounded
+  next-start queue without silently displacing the running task. Propagate it to
+  an applicable shared Skill or process authority when the user requests reuse.
 - Put run facts and concrete completion state only in live status or evidence.
 
 Make the capture the first completed action, not a promise to document later.
-After context loss or compaction, resume by reading the leading active plan item
-and current intent before older history. Read verbatim recovery evidence only
+At every recovery boundary—new session, Agent/task handoff, Agent or tool
+interruption, long pause, context loss or compaction, or an explicit user
+instruction such as `continue`, `resume`, or `pick this back up`—first reconcile
+any environment-level thread/task goal with the current active item. Use an
+available goal/task-state API before inferring state from a summary or recent
+message. Then read
+the top next-start item and current intent before older history. Treat a
+continue/resume instruction as authorization to continue the governing goal,
+not to select the most recently visible subtopic. Missing summary, checkpoint,
+or tool-state detail is `unknown`, not evidence that work is unfinished or
+authorization to change state. Preserve the current active goal and terminal
+states by default.
+Read verbatim recovery evidence only
 when the normal chain cannot resolve serious drift, conflict, blockage, or an
 audit/recovery question. If no durable progress control exists, update the
 smallest existing planning/status artifact; do not create a competing authority
 merely to remember the instruction.
+
+Change the current active goal only after an explicit user override, a valid
+terminal that promotes the agreed next item, or an authority-approved replan for
+a real blocker. A blocker alone marks the current item blocked; it does not
+authorize replacing it. Do not reopen `resolved`, `superseded`, or `closed` work
+because context is incomplete, an Agent wants to re-audit it, or the result can
+still be improved. Reopen only on an explicit user instruction or new verifiable
+evidence that invalidates the terminal, and preserve the prior terminal plus the
+reopen source and impact. After each user-numbered subtask or declared stage
+terminal, update the active item before starting the next one.
 
 After analysis forms a conclusion that changes the remaining route, after a
 declared execution terminal, when a shared blocker invalidates downstream work,
@@ -67,6 +90,9 @@ explicit terminal:
 3. Keep and mark it terminal when the primary progress authority intentionally
    preserves history, or when the request failed, was blocked, was interrupted,
    or still has a follow-up obligation. Record the terminal reason.
+4. When the progress authority uses a next-start queue, promote its top item
+   after removing a successful current item; do not leave queued work stranded
+   behind an empty current slot.
 
 Never delete direct-wording evidence, an adopted decision, live status, or
 completion evidence merely because the task that captured it ended. Do not let

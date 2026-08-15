@@ -23,7 +23,7 @@ create all three when existing authorities already separate them safely.
 | --- | --- | --- |
 | Current intent | Still-effective user intent, lightly curated without changing meaning | Verbatim evidence, requirements, run status |
 | Verbatim recovery | Append-first exact user input and indispensable attributed context | Daily entry point, full transcript, Agent-thought dump |
-| Active plan/progress | Current goal, route-changing stage conclusions, terminal, next action, recovery entry | Product authority, usage history, permanent completed-task archive |
+| Active plan/progress | Current goal, bounded next-start queue, route-changing stage conclusions, terminal, next action, recovery entry | Product authority, usage history, permanent completed-task archive |
 
 Requirements remain the current interpreted product authority. Live status and
 run evidence remain separate from the active plan. Store a full round terminal
@@ -40,11 +40,17 @@ Before backward search, analysis, implementation, or an older plan:
 1. Append product-specific intent, correction, value judgment, or open question
    verbatim to recovery evidence when that role exists.
 2. Put a cross-project obligation, process correction, bounded read-only task,
-   or execution order at the front of the primary active plan/progress control.
+   or execution order in the primary active plan/progress control. If it changes
+   the running route, update the current item; otherwise insert it at the top of
+   a bounded next-start queue without silently replacing the running task.
 3. Split one input across both roles when it genuinely contains product intent
    and a general execution obligation; link both captures to one source.
 4. Capture only enough source/time context to recover the input. Do not decide
    its status, rewrite it, or promote it to requirements before analysis.
+5. When the repository supports stable capture identities, give the recovery
+   entry one and reference the same identity from its active-plan item. Keep the
+   recovery status, fast index, and whether an active obligation still exists
+   consistent at terminal.
 
 If the repository has no durable recovery or progress role, use the smallest
 existing appropriate artifact. Do not create a parallel authority solely to
@@ -88,8 +94,12 @@ the active plan. If the terminal changes current delivery status, add a concise
 scope/outcome/evidence-pointer update to live status; otherwise leave it
 unchanged.
 
-Keep only one primary active item. A small queue may exist, but not a competing
-backlog. Stage conclusions do not become user intent merely because they are in
+Keep only one current active item. A small next-start queue may exist, but not a
+competing backlog. Give queued items only the source, goal, known conclusion,
+next action, and recovery entry needed to resume; add the full terminal and
+temporary subplan when an item becomes current. If a new input changes the
+current route, update the current item instead of hiding the change in the
+queue. Stage conclusions do not become user intent merely because they are in
 the plan; promote them only after user adoption or the repository's authorized
 decision process.
 
@@ -99,6 +109,9 @@ Use size as a maintenance signal, not a deletion command:
 
 - Optimize the active plan for one-screen/fast recovery. Around 200 lines is a
   useful review signal; around 250 lines should trigger promotion and cleanup.
+- Order a next-start queue by explicit user priority; otherwise put the newest
+  captured general obligation first. Keep it bounded and promote the top item
+  as soon as the current item reaches terminal.
 - Organize current intent by stable user concern rather than chronology. Around
   80–250 lines is usually scannable; over about 300 lines, audit for history,
   status, implementation detail, or repetition.
@@ -122,12 +135,14 @@ roles once in this order:
 2. Refresh current intent: retain effective intent and real open tension; remove
    a fully superseded daily-reading copy only when exact evidence remains
    recoverable.
-3. Annotate the new recovery entry with capture source/time, a few retrieval
-   phrases, status such as `active`, `superseded`, `resolved`, or
-   `recovery-only`, and replacement/resolution links. Do not edit the quote.
+3. If the task created a recovery entry, annotate it with capture source/time,
+   a few retrieval phrases, status such as `active`, `superseded`, `resolved`,
+   or `recovery-only`, and replacement/resolution links. Do not create a
+   recovery entry solely to satisfy terminal maintenance, and do not edit an
+   existing quote.
 4. Delete a successful temporary active item/subplan when no obligation or
-   required evidence remains. If no item remains, say so explicitly when the
-   repository needs a persistent progress file.
+   required evidence remains. Promote the top next-start item when one exists;
+   say there is no active item only when both current and queue are empty.
 5. Retain and terminally mark failed, blocked, interrupted, follow-up, audit,
    recovery, or handoff state. Record reason and next authority/decision.
 
@@ -137,12 +152,37 @@ Never delete a temporary anchor before its durable consequences are promoted.
 
 ## Reading And Recovery
 
+Apply this section at every recovery boundary: a new session, Agent/task
+handoff, Agent or tool interruption, long pause, context loss or compaction, or
+an explicit `continue`, `resume`, or equivalent instruction. Such an instruction
+authorizes continuation of the governing goal; it does not authorize choosing
+the most recently visible subtopic or checkpoint as a new goal.
+
+Use an environment goal/task-state API when one exists. Do not infer the
+governing goal or terminal state from a compacted summary, last message, tool
+checkpoint, or most recent file touched when authoritative state is available.
+
 Normal resume order:
 
 ```text
-authority index -> primary active item -> current intent -> requirements ->
+environment-level thread/task goal, when available -> authority index ->
+current active item -> top next-start item -> current intent -> requirements ->
 only the downstream authorities needed
 ```
+
+Treat missing compacted, handed-off, interrupted, or checkpoint detail as
+unknown. It cannot reopen a terminal item, demote the current goal, or promote
+another item. Before the first state mutation after recovery, reconcile the
+external goal and active plan. If they conflict, preserve both states while
+resolving the conflict from the latest explicit user instruction or governing
+authority; ask the user when that evidence cannot resolve it.
+
+Permit an active-goal transition only for an explicit user override, a valid
+terminal promotion, or an authority-approved replan for a real blocker. Mark a
+blocked current item blocked before considering a replan. Reopen resolved,
+superseded, or closed work only through an explicit user reopen or new verifiable
+evidence that invalidates its terminal; retain the old terminal and attribute
+the reopen source and impact.
 
 Escalated recovery order:
 
@@ -158,6 +198,15 @@ more current.
 ## Failure Signals
 
 - latest governing input exists only in chat;
+- recovery begins changing state before reconciling an available external goal
+  with the current active item;
+- a `continue` or `resume` instruction is interpreted as permission to choose
+  the latest visible subtopic instead of continuing the governing goal;
+- missing compacted context is treated as unfinished work or permission to
+  reopen a terminal item;
+- an Agent reopens resolved work merely to re-audit or improve it;
+- a current goal is replaced because a blocker exists, without an authorized
+  replan;
 - analysis continues for a long time without persisting a route-changing
   conclusion;
 - current intent contains exact-quote formatting after wording was cleaned;
@@ -165,6 +214,7 @@ more current.
 - Agent summaries are attributed to the user;
 - active plan duplicates requirements, usage, full logs, or every local check;
 - completed temporary items accumulate as a shadow backlog;
+- the current slot is empty while a next-start queue still contains work;
 - a temporary item is deleted before durable consequences or recovery evidence
   are promoted;
 - size limits mechanically erase current intent or unique evidence.
