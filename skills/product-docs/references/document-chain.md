@@ -68,6 +68,10 @@ requirements / intent
   readiness, availability, and acceptance separate when they affect a decision.
 - Keep candidate proposals, experiments, machine suggestions, and adopted
   decisions visibly distinct.
+- When applicable, open a requirements authority with the effective
+  direct-wording authorities and external source register it interprets,
+  including each source's status; link to the evidence rather than copying
+  quotations or creating a second requirements authority.
 
 ## Reusable Behavior Versus Concrete Runs
 

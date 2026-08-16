@@ -112,6 +112,29 @@ scope, execution, or status records rather than the route registry.
 - Preserve the user-visible reason and actionable gap for a failed or
   unavailable route.
 
+### Source Evidence And Publication Boundaries
+
+When external material or cases inform a public repository, track source
+evidence separately from route runtime status, authorization, per-object
+execution, and usage acceptance. Use the smallest applicable state set:
+
+```text
+not-supplied
+locator-only
+body-inaccessible
+privately-acquired
+safe-derivative-retained
+```
+
+`locator-only` is not body evidence. `body-inaccessible` records an attempted
+access that yielded no body; do not infer content from the locator. A
+`privately-acquired` body remains outside a public repository unless an
+explicitly authorized, reviewed, safe derivative or template is published.
+Keep source locators, source bodies, case mappings, private provenance,
+derivatives, credentials, and publication candidates as separate data classes
+with distinct permitted writers. Human review remains required when a
+combination of individually harmless details could make a case linkable.
+
 Prefer:
 
 ```text

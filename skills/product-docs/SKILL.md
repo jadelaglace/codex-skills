@@ -41,6 +41,11 @@ wrong authority:
   an applicable shared Skill or process authority when the user requests reuse.
 - Put run facts and concrete completion state only in live status or evidence.
 
+For an empty or newly initialized repository, use the optional
+`references/greenfield-init.md` route to choose the smallest authority chain
+before generating documents. Keep this route conditional; an established
+repository keeps its existing chain.
+
 After any required recovery reconciliation, make the capture the first completed
 task action, not a promise to document later.
 At every recovery boundary—new session, Agent/task handoff, Agent or tool
@@ -74,6 +79,7 @@ reopen source and impact. After each user-numbered subtask or declared stage
 terminal, update the active item before starting the next one.
 
 Record each active-goal transition with a closed type enum such as
+`user-explicit-goal-start`,
 `user-explicit-goal-override`, `legal-terminal-auto-promote`, or
 `authority-approved-blocker-replan`, plus an affirmative evidence sentence
 whose prefix matches that type. Reject keyword-only or negated transition text.
@@ -111,6 +117,9 @@ its durable consequences have been promoted.
 Read `references/intent-plan-lifecycle.md` before creating or substantially
 changing current-intent, verbatim-recovery, active-plan, or progress-control
 roles, and before designing their curation, size, status, or terminal cleanup.
+
+Read `references/greenfield-init.md` before initializing an empty repository or
+choosing an initial authority chain.
 
 ## Establish Authority And Mode
 

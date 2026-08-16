@@ -174,6 +174,18 @@ that authority. Validate the order inside the bounded block (Goal/task-state API
 before Active Plan), including a mutation that reverses it. The hook is not a
 second plan or lifecycle authority and must not copy its detailed contract.
 
+### Recovery Hook Checker Pattern
+
+Use marker-bounded checks rather than whole-file or exact-newline assumptions:
+
+1. Extract the bounded hook block; fail when its markers are missing or repeated.
+2. Normalize LF and CRLF for comparison inside the block.
+3. Require the goal/task-state API marker and the active-plan link, in that
+   order, within the same block.
+4. Mutate the order in an isolated copy and assert that the checker rejects it.
+5. Treat a missing hook as not-applicable only when recovery safety is outside
+   the task scope; otherwise report it as an initialization gap.
+
 Normal resume order:
 
 ```text
@@ -202,6 +214,11 @@ Mark a blocked current item blocked before considering a replan. Reopen resolved
 superseded, or closed work only through an explicit user reopen or new verifiable
 evidence that invalidates its terminal; retain the old terminal and attribute
 the reopen source and impact.
+
+The initial creation of a governing goal is a distinct transition. Record it as
+`user-explicit-goal-start` when the user explicitly authorizes the goal, with an
+affirmative evidence sentence using that prefix. Do not treat a first visible
+message, an Agent suggestion, or a recovered summary as goal authorization.
 
 Escalated recovery order:
 
