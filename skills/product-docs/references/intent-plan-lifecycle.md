@@ -103,6 +103,12 @@ queue. Stage conclusions do not become user intent merely because they are in
 the plan; promote them only after user adoption or the repository's authorized
 decision process.
 
+Give every queued item an explicit promotion policy. An auto-promote item may
+advance only after a valid current-item terminal. A held, paused, or
+`requires-explicit-resume` item cannot advance until the named user or authority
+condition occurs. If all remaining items are held, the current slot may be
+explicitly empty; do not fill it merely to avoid an empty active marker.
+
 ## Size And Structure
 
 Use size as a maintenance signal, not a deletion command:
@@ -110,8 +116,8 @@ Use size as a maintenance signal, not a deletion command:
 - Optimize the active plan for one-screen/fast recovery. Around 200 lines is a
   useful review signal; around 250 lines should trigger promotion and cleanup.
 - Order a next-start queue by explicit user priority; otherwise put the newest
-  captured general obligation first. Keep it bounded and promote the top item
-  as soon as the current item reaches terminal.
+  captured general obligation first. Keep it bounded. At terminal, select only
+  the first item whose promotion policy currently permits advancement.
 - Organize current intent by stable user concern rather than chronology. Around
   80–250 lines is usually scannable; over about 300 lines, audit for history,
   status, implementation detail, or repetition.
@@ -141,8 +147,9 @@ roles once in this order:
    recovery entry solely to satisfy terminal maintenance, and do not edit an
    existing quote.
 4. Delete a successful temporary active item/subplan when no obligation or
-   required evidence remains. Promote the top next-start item when one exists;
-   say there is no active item only when both current and queue are empty.
+   required evidence remains. Promote only a queue item whose policy permits
+   it. If all remaining items require explicit resume or other new authority,
+   keep them queued and mark the current slot explicitly empty.
 5. Retain and terminally mark failed, blocked, interrupted, follow-up, audit,
    recovery, or handoff state. Record reason and next authority/decision.
 
@@ -161,13 +168,18 @@ the most recently visible subtopic or checkpoint as a new goal.
 Use an environment goal/task-state API when one exists. Do not infer the
 governing goal or terminal state from a compacted summary, last message, tool
 checkpoint, or most recent file touched when authoritative state is available.
+Repositories that rely on a deep active-plan authority should expose a compact,
+explicitly bounded root-level operational hook naming this order and linking
+that authority. Validate the order inside the bounded block (Goal/task-state API
+before Active Plan), including a mutation that reverses it. The hook is not a
+second plan or lifecycle authority and must not copy its detailed contract.
 
 Normal resume order:
 
 ```text
-environment-level thread/task goal, when available -> authority index ->
-current active item -> top next-start item -> current intent -> requirements ->
-only the downstream authorities needed
+environment-level thread/task goal, when available -> shallow recovery hook ->
+authoritative current active item -> authority index -> current intent ->
+requirements -> only the downstream authorities needed
 ```
 
 Treat missing compacted, handed-off, interrupted, or checkpoint detail as
@@ -177,9 +189,16 @@ external goal and active plan. If they conflict, preserve both states while
 resolving the conflict from the latest explicit user instruction or governing
 authority; ask the user when that evidence cannot resolve it.
 
+The queue is not part of goal selection during recovery. Read it only after the
+current identity is established and only to preserve future obligations. Never
+execute a held or explicit-resume item because it is first, recent, or the only
+remaining queue entry.
+
 Permit an active-goal transition only for an explicit user override, a valid
-terminal promotion, or an authority-approved replan for a real blocker. Mark a
-blocked current item blocked before considering a replan. Reopen resolved,
+terminal promotion, or an authority-approved replan for a real blocker. Record
+the source as a closed enum and pair it with an affirmative evidence sentence
+whose prefix matches the enum; reject keyword-only or negated transition text.
+Mark a blocked current item blocked before considering a replan. Reopen resolved,
 superseded, or closed work only through an explicit user reopen or new verifiable
 evidence that invalidates its terminal; retain the old terminal and attribute
 the reopen source and impact.
@@ -214,7 +233,8 @@ more current.
 - Agent summaries are attributed to the user;
 - active plan duplicates requirements, usage, full logs, or every local check;
 - completed temporary items accumulate as a shadow backlog;
-- the current slot is empty while a next-start queue still contains work;
+- the current slot is empty while a next-start queue contains work that is
+  currently eligible for automatic promotion;
 - a temporary item is deleted before durable consequences or recovery evidence
   are promoted;
 - size limits mechanically erase current intent or unique evidence.

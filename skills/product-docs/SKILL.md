@@ -41,19 +41,22 @@ wrong authority:
   an applicable shared Skill or process authority when the user requests reuse.
 - Put run facts and concrete completion state only in live status or evidence.
 
-Make the capture the first completed action, not a promise to document later.
+After any required recovery reconciliation, make the capture the first completed
+task action, not a promise to document later.
 At every recovery boundary—new session, Agent/task handoff, Agent or tool
 interruption, long pause, context loss or compaction, or an explicit user
-instruction such as `continue`, `resume`, or `pick this back up`—first reconcile
-any environment-level thread/task goal with the current active item. Use an
-available goal/task-state API before inferring state from a summary or recent
-message. Then read
-the top next-start item and current intent before older history. Treat a
+instruction such as `continue`, `resume`, or `pick this back up`—first call an
+available goal/task-state API. Then immediately follow the repository's shallow
+recovery hook to its authoritative active plan/progress control and reconcile
+the single current item before reading the general authority index, current
+intent, older history, or queue. Treat a
 continue/resume instruction as authorization to continue the governing goal,
 not to select the most recently visible subtopic. Missing summary, checkpoint,
 or tool-state detail is `unknown`, not evidence that work is unfinished or
 authorization to change state. Preserve the current active goal and terminal
-states by default.
+states by default. A next-start item marked held, paused, or
+`requires-explicit-resume` remains queued after the current item reaches
+terminal; promote it only when its declared authority condition is satisfied.
 Read verbatim recovery evidence only
 when the normal chain cannot resolve serious drift, conflict, blockage, or an
 audit/recovery question. If no durable progress control exists, update the
@@ -69,6 +72,11 @@ still be improved. Reopen only on an explicit user instruction or new verifiable
 evidence that invalidates the terminal, and preserve the prior terminal plus the
 reopen source and impact. After each user-numbered subtask or declared stage
 terminal, update the active item before starting the next one.
+
+Record each active-goal transition with a closed type enum such as
+`user-explicit-goal-override`, `legal-terminal-auto-promote`, or
+`authority-approved-blocker-replan`, plus an affirmative evidence sentence
+whose prefix matches that type. Reject keyword-only or negated transition text.
 
 After analysis forms a conclusion that changes the remaining route, after a
 declared execution terminal, when a shared blocker invalidates downstream work,
@@ -90,9 +98,10 @@ explicit terminal:
 3. Keep and mark it terminal when the primary progress authority intentionally
    preserves history, or when the request failed, was blocked, was interrupted,
    or still has a follow-up obligation. Record the terminal reason.
-4. When the progress authority uses a next-start queue, promote its top item
-   after removing a successful current item; do not leave queued work stranded
-   behind an empty current slot.
+4. When the progress authority uses a next-start queue, promote only an item
+   whose declared policy permits automatic promotion. Keep held, paused, or
+   explicit-resume items queued; an empty current slot is correct when every
+   remaining item requires new authority.
 
 Never delete direct-wording evidence, an adopted decision, live status, or
 completion evidence merely because the task that captured it ended. Do not let
@@ -110,15 +119,21 @@ Before assessing, reporting, or editing:
 1. Read local instructions and discover the repository's authority index or
    equivalent documents. Do not assume filenames, numbering, or one file per
    role.
-2. Identify the lifecycle mode: discovery, definition, delivery,
+2. Check whether root-level local instructions or README expose a mandatory,
+   explicitly bounded recovery-hook block to the active-plan authority. When
+   recovery safety matters and no shallow hook exists, add the smallest bounded
+   link-and-order hook that preserves the deeper document as the sole lifecycle
+   authority. Validate that Goal/task-state API occurs before the Active Plan
+   link inside the block, and add a mutation that reverses that order.
+3. Identify the lifecycle mode: discovery, definition, delivery,
    real-use/recovery, closure, or operations.
-3. Classify the request by its highest affected role: intent/requirements,
+4. Classify the request by its highest affected role: intent/requirements,
    product behavior, plan/progress, acceptance/evidence, architecture, design,
    or verification.
-4. Identify which decisions belong to the user and which routine work belongs
+5. Identify which decisions belong to the user and which routine work belongs
    to Agents.
-5. Read the highest affected authority before its downstream interpretations.
-6. Start with the smallest source set that can answer the request. Expand only
+6. Read the highest affected authority before its downstream interpretations.
+7. Start with the smallest source set that can answer the request. Expand only
    when a real semantic dependency appears.
 
 Use this routing guide:
