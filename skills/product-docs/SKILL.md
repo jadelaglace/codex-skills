@@ -68,6 +68,45 @@ audit/recovery question. If no durable progress control exists, update the
 smallest existing planning/status artifact; do not create a competing authority
 merely to remember the instruction.
 
+Reconcile three recovery layers: live conversation, goal runtime state, and
+durable documents. The live layer is newest but most vulnerable to compaction
+damage; the goal layer carries the short- or medium-term scope across sessions
+and may pause; documents preserve the same scope's durable state and hard
+boundaries but may lag one terminal writeback.
+
+Before selecting work, exclude instruction instances already proved terminal.
+Then select unfinished work in this closed order:
+
+```text
+newest unfinished user instruction established from live conversation at recovery
+-> started goal
+-> current executable instruction in durable documents
+-> paused goal
+-> compacted recovery context
+-> pre-compaction instruction
+```
+
+A lower-ranked candidate cannot displace a higher-ranked one. Compacted context
+and pre-compaction instructions are locating evidence only until reconciled with
+live, goal, or document authority; stop rather than infer authorization when
+their identity or state cannot be verified.
+
+Treat completion evidence as an increasingly durable replay prohibition:
+
+```text
+explicit completion report in live conversation
+< goal progress marked terminal
+< durable documents marked terminal or removed by successful terminal cleanup
+```
+
+Every level forbids rerunning the same instruction instance unless the user
+explicitly reissues it as a new instruction or new verifiable evidence
+invalidates its terminal. A later level cannot be weakened by an older `in
+progress` message or compacted summary. When live evidence proves completion but
+goal or documents lag, perform only the missing terminal writeback and
+goal/stage completion; do not rerun the work, tests, publication, release, or closure. Read
+`references/intent-plan-lifecycle.md` for reconciliation cases.
+
 Change the current active goal only after an explicit user override, a valid
 terminal that promotes the agreed next item, or an authority-approved replan for
 a real blocker. A blocker alone marks the current item blocked; it does not

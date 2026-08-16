@@ -201,6 +201,78 @@ external goal and active plan. If they conflict, preserve both states while
 resolving the conflict from the latest explicit user instruction or governing
 authority; ask the user when that evidence cannot resolve it.
 
+Reconcile three complementary recovery layers. Mandatory read order discovers
+state; it does not let an older layer erase facts already visible in a newer
+one:
+
+1. **Live conversation layer** — the latest explicit instruction, actual result,
+   and completion report. It is the most timely and has the highest action
+   priority, but is also most exposed to interruption, compaction reordering, or
+   fragments. Verify instruction-instance identity against visible results and
+   the other layers.
+2. **Goal runtime layer** — short- or medium-term scope and execution state that
+   survives sessions and compaction. It usually represents the real direction
+   and aligns with one durable active scope, but it may be paused to yield to a
+   newer live instruction. Pausing preserves identity and obligations without
+   authorizing execution.
+3. **Durable document layer** — the same scope's persisted plan, current step,
+   terminal state, and hard boundaries. It is most resistant to noise and drift,
+   but may lag the live and goal layers by one terminal-writeback window.
+
+### Recovery Selection And Replay Prohibition
+
+First identify instruction or stage instances and exclude those already proved
+terminal. Select among the remaining unfinished instances in this closed order:
+
+```text
+newest unfinished explicit user instruction established from live conversation at recovery
+-> currently started goal
+-> current executable instruction in durable documents
+-> paused goal
+-> compacted recovery context
+-> pre-compaction instruction
+```
+
+Each step is a fallback, not an invitation to blend states. A lower-ranked
+candidate cannot replace, reopen, or delay a higher-ranked one. The last two
+steps may locate an instruction but cannot independently prove that it remains
+authorized or unfinished; reconcile them with live, goal, or document authority.
+If identity or state remains ambiguous, stop and ask rather than execute.
+
+For the same instruction instance, use this increasing completion-evidence
+strength:
+
+```text
+explicit completion report in live conversation
+< goal progress marked completed or otherwise terminal
+< durable documents marked terminal or removed by successful terminal cleanup
+```
+
+Every level prohibits replay. The stronger levels are increasingly persistent
+across compaction and cannot be overridden by older, weaker `in progress`
+evidence. Absence from an active document counts only when terminal evidence or
+the document's cleanup policy proves successful removal; mere absence is
+`unknown`. Reopen only when the user explicitly reissues the instruction as a
+new instance or new verifiable evidence invalidates the recorded terminal.
+
+When the live layer contains the corresponding result and explicitly reports
+completion while the goal or documents still say `in progress`, and the
+difference is fully explained by missing terminal maintenance, classify the
+state as **writeback lag**. Perform only the remaining goal/document/evidence
+writeback and advance the goal or stage to the state already proved by the
+result. Do not rerun the business action, closure, tests, publication, or release.
+An older `in progress` document cannot overwrite a completion fact that has
+already occurred in the live layer.
+
+When the live layer has no credible new instruction or result, continue from the
+started goal and durable current step. A paused goal remains below the durable
+current instruction in recovery priority. When durable documents already mark
+the instance terminal, or successful terminal maintenance has removed it from
+the active plan, do not infer `unfinished` from absence or incomplete context.
+Compacted summaries, handoff text, older messages, and tool checkpoints are not
+a fourth layer. Use them only to locate and reconcile three-layer evidence; they
+cannot independently authorize action or manufacture a new instruction instance.
+
 The queue is not part of goal selection during recovery. Read it only after the
 current identity is established and only to preserve future obligations. Never
 execute a held or explicit-resume item because it is first, recent, or the only
@@ -240,6 +312,10 @@ more current.
   the latest visible subtopic instead of continuing the governing goal;
 - missing compacted context is treated as unfinished work or permission to
   reopen a terminal item;
+- a lower-ranked recovery candidate displaces a newer unfinished user
+  instruction, a started goal, or the durable current instruction;
+- an instruction is replayed after live completion, goal-terminal, or durable
+  terminal/cleanup evidence already proves the same instance complete;
 - an Agent reopens resolved work merely to re-audit or improve it;
 - a current goal is replaced because a blocker exists, without an authorized
   replan;
