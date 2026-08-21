@@ -48,13 +48,18 @@ repository keeps its existing chain.
 
 After any required recovery reconciliation, make the capture the first completed
 task action, not a promise to document later.
-At every recovery boundary—new session, Agent/task handoff, Agent or tool
-interruption, long pause, context loss or compaction, or an explicit user
-instruction such as `continue`, `resume`, or `pick this back up`—first call an
-available goal/task-state API. Then immediately follow the repository's shallow
-recovery hook to its authoritative active plan/progress control and reconcile
-the single current item before reading the general authority index, current
-intent, older history, or queue. Treat a
+At every full recovery boundary—new session, context loss or compaction,
+Agent/task handoff or interruption that may lose control/context, a long pause
+with uncertain execution state, or an explicit user instruction such as
+`continue`, `resume`, or `pick this back up`—first call an available
+goal/task-state API. An ordinary synchronous tool, command, or API failure that
+returns a clear result while the current turn and governing task remain intact
+is not a full recovery boundary; handle or retry it locally. For an ambiguous
+stateful failure, reconcile the affected external state and rerun the full hook
+only when control/context or task identity may also have been lost. Then
+immediately follow the repository's shallow recovery hook to its authoritative
+active plan/progress control and reconcile the single current item before
+reading the general authority index, current intent, older history, or queue. Treat a
 continue/resume instruction as authorization to continue the governing goal,
 not to select the most recently visible subtopic. Missing summary, checkpoint,
 or tool-state detail is `unknown`, not evidence that work is unfinished or
@@ -67,6 +72,11 @@ when the normal chain cannot resolve serious drift, conflict, blockage, or an
 audit/recovery question. If no durable progress control exists, update the
 smallest existing planning/status artifact; do not create a competing authority
 merely to remember the instruction.
+
+Keep the active plan as a compact dynamic hot path, not a copy of stable
+lifecycle policy or completed history. When the goal is missing/terminal, the
+active marker is empty, and live conversation contains an explicit new request,
+finish recovery there and read only the authorities that request actually needs.
 
 Reconcile three recovery layers: live conversation, goal runtime state, and
 durable documents. The live layer is newest but most vulnerable to compaction

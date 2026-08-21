@@ -113,8 +113,10 @@ explicitly empty; do not fill it merely to avoid an empty active marker.
 
 Use size as a maintenance signal, not a deletion command:
 
-- Optimize the active plan for one-screen/fast recovery. Around 200 lines is a
-  useful review signal; around 250 lines should trigger promotion and cleanup.
+- Optimize the active plan for one-screen/fast recovery. Keep stable lifecycle
+  policy in its governing authority and completed history in status/evidence or
+  version history. Use both line and character/byte bounds appropriate to the
+  repository so long lines cannot evade the hot-path limit.
 - Order a next-start queue by explicit user priority; otherwise put the newest
   captured general obligation first. Keep it bounded. At terminal, select only
   the first item whose promotion policy currently permits advancement.
@@ -159,11 +161,19 @@ Never delete a temporary anchor before its durable consequences are promoted.
 
 ## Reading And Recovery
 
-Apply this section at every recovery boundary: a new session, Agent/task
-handoff, Agent or tool interruption, long pause, context loss or compaction, or
-an explicit `continue`, `resume`, or equivalent instruction. Such an instruction
-authorizes continuation of the governing goal; it does not authorize choosing
-the most recently visible subtopic or checkpoint as a new goal.
+Apply this section at every full recovery boundary: a new session, context loss
+or compaction, Agent/task handoff or interruption that may lose control/context,
+a long pause with uncertain execution state, or an explicit `continue`,
+`resume`, or equivalent instruction. Such an instruction authorizes
+continuation of the governing goal; it does not authorize choosing the most
+recently visible subtopic or checkpoint as a new goal.
+
+An ordinary synchronous tool, command, or API failure with a clear result does
+not require full recovery while the current turn, context, and governing task
+identity remain intact. Handle or retry it locally. If a stateful operation has
+an ambiguous outcome, reconcile the affected external state first; rerun the
+full hook only when control/context or governing-task identity may also have
+been lost.
 
 Use an environment goal/task-state API when one exists. Do not infer the
 governing goal or terminal state from a compacted summary, last message, tool
@@ -182,8 +192,11 @@ Use marker-bounded checks rather than whole-file or exact-newline assumptions:
 2. Normalize LF and CRLF for comparison inside the block.
 3. Require the goal/task-state API marker and the active-plan link, in that
    order, within the same block.
-4. Mutate the order in an isolated copy and assert that the checker rejects it.
-5. Treat a missing hook as not-applicable only when recovery safety is outside
+4. Distinguish full recovery from ordinary synchronous failures with intact
+   context; do not make every failed command restart recovery.
+5. Mutate the order and local-failure boundary in isolated copies and assert
+   that the checker rejects each defect.
+6. Treat a missing hook as not-applicable only when recovery safety is outside
    the task scope; otherwise report it as an initialization gap.
 
 Normal resume order:
@@ -193,6 +206,12 @@ environment-level thread/task goal, when available -> shallow recovery hook ->
 authoritative current active item -> authority index -> current intent ->
 requirements -> only the downstream authorities needed
 ```
+
+When the goal is missing or terminal, the active marker is empty, and the live
+conversation contains an explicit new request, stop recovery after the active
+plan. Do not read history, usage, verbatim evidence, or the full authority chain
+just to reconfirm that no old task is active; continue with only the authorities
+the new request needs.
 
 Treat missing compacted, handed-off, interrupted, or checkpoint detail as
 unknown. It cannot reopen a terminal item, demote the current goal, or promote
@@ -325,6 +344,10 @@ more current.
 - recovery evidence is routinely read from the beginning;
 - Agent summaries are attributed to the user;
 - active plan duplicates requirements, usage, full logs, or every local check;
+- active plan duplicates stable lifecycle policy or completed history in the
+  mandatory recovery hot path;
+- an ordinary synchronous tool failure with intact context restarts full
+  recovery;
 - completed temporary items accumulate as a shadow backlog;
 - the current slot is empty while a next-start queue contains work that is
   currently eligible for automatic promotion;
