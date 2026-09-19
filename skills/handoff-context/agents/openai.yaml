@@ -1,0 +1,6 @@
+interface:
+  display_name: "Handoff Context"
+  short_description: "Create continuation-ready stage handoffs"
+  default_prompt: "Use $handoff-context to create a concise, evidence-backed handoff for the next conversation."
+policy:
+  allow_implicit_invocation: true

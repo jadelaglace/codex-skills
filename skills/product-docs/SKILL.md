@@ -1,6 +1,8 @@
 ---
 name: product-docs
 description: Maintain product and system documentation, authority, traceability, and delivery governance across discovery, definition, delivery, real-use recovery, closure, and operations. Use when defining or revising requirements, PRDs, acceptance criteria, design specifications, architecture, development process, status, test traceability, ownership, or human/Agent responsibilities. Preserve user intent, isolate external advice, map the existing authority chain, research real routes when relevant, keep multi-axis progress and evidence honest, propagate only real consequences, and use risk-based validation.
+metadata:
+  version: "1.0.2"
 ---
 
 # Product Docs
