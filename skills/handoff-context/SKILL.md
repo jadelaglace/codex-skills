@@ -4,7 +4,7 @@ description: >
   Create a concise but complete stage handoff that can be pasted into a new conversation so the next Agent can continue safely. Use when the user says “交接”, asks for a阶段性总结上下文, or asks for continuation-ready context. Preserve current authority, evidence, terminal states, unresolved items, and boundaries; do not invent work or restart completed work.
 metadata:
   short-description: "Generate continuation-ready handoff context"
-  version: "1.0.0"
+  version: "1.0.1"
 ---
 
 # Handoff Context
