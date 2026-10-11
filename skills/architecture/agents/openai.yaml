@@ -1,0 +1,4 @@
+interface:
+  display_name: "架构工程"
+  short_description: "Design contracts and verify functional delivery"
+  default_prompt: "Use $architecture to define technical contracts, issue implementation criteria, and verify returned functional-unit and integration evidence."

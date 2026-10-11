@@ -2,7 +2,7 @@
 name: product-docs
 description: Maintain product and system documentation, authority, traceability, and delivery governance across discovery, definition, delivery, real-use recovery, closure, and operations. Use when defining or revising requirements, PRDs, acceptance criteria, design specifications, architecture, development process, status, test traceability, ownership, or human/Agent responsibilities. Preserve user intent, isolate external advice, map the existing authority chain, research real routes when relevant, keep multi-axis progress and evidence honest, propagate only real consequences, and use risk-based validation.
 metadata:
-  version: "1.0.2"
+  version: "1.0.3"
 ---
 
 # Product Docs
@@ -222,6 +222,43 @@ latest direct user instruction
 -> external reference
 -> implementation convenience
 ```
+
+## Connect Specialist Quality Work Conditionally
+
+Keep product goals, observable acceptance, authority, and evidence traceability
+here. When the affected scope needs specialist work, check for an available,
+applicable Skill before routing:
+
+- [architecture](../architecture/SKILL.md): architecture, technical choices, interfaces,
+  non-functional targets, test strategy, and architecture review.
+- [code-quality](../code-quality/SKILL.md): function and data contracts, naming, context lifecycles,
+  error/resource handling, unit tests, static checks, and code review.
+- [design-standards](../design-standards/SKILL.md) (设计规范): moodboards, adopted design principles,
+  standards libraries, templates, visual self-checks, and refinement.
+
+Locate and read the selected specialist's actual `SKILL.md` before using it;
+the links above resolve this installation. In another environment, discover by
+name instead of assuming these paths. Skill availability alone does not prove
+its gates passed. Report missing specialists or material verification gaps and
+use available methods within scope; do not invent invocation or passage.
+
+Pass only relevant goals, acceptance, existing constraints, and change scope.
+Each participating layer owns a delivery loop: issue its constraints and
+acceptance criteria, receive downstream results, verify its own claims, and
+return conclusions, evidence, and gaps upstream. Architecture closes functional
+unit and integration acceptance; design, when applicable, closes visual
+acceptance on actual outputs; code closes implementation, review, testing, and
+repair against received contracts. Product receives these results and verifies
+the whole user outcome, preserving the user's final acceptance authority.
+Routing alone or a downstream pass does not close the upstream loop. Return
+gaps to the responsible layer for repair and verification; do not equate code
+tests, functional acceptance, visual acceptance, and whole-product delivery.
+Specialists may be invoked directly with necessary upstream context.
+Do not force every task through every specialist or duplicate their detailed
+rules here. Read [the specialization plan](references/quality-specialization-plan.md)
+only when planning or implementing these extensions; it is not an execution
+contract or permission to start unrelated work. The installed specialist Skills
+own their professional procedures; this entry owns product routing and return.
 
 ## Protect User Intent And External Boundaries
 

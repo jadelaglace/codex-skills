@@ -1,0 +1,4 @@
+interface:
+  display_name: "设计规范"
+  short_description: "Build standards and verify rendered visual quality"
+  default_prompt: "Use $design-standards to guide implementation with adopted standards and templates, inspect actual outputs, refine defects, and return visual evidence."

@@ -1,0 +1,4 @@
+interface:
+  display_name: "代码质量"
+  short_description: "Implement, review, test, and return code evidence"
+  default_prompt: "Use $code-quality to implement or review the authorized code scope, verify its contracts, and return review and test evidence upstream."
