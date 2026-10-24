@@ -68,3 +68,31 @@ When a visual defect comes from an upstream data/interface constraint, report
 the dependency and return it to architecture or product with evidence. Do not
 hide the issue through truncation, fake success text, or removal of required
 content. Return separate visual and behavioral conclusions after refinement.
+
+## Comparing, Prompting, And Converging
+
+### Screen By Screen
+
+Compare against a reference by dimension, not overall impression: layout,
+hierarchy, density, affordance, material, and quality. "It feels off" is not a
+finding; "the header block sits 40px lower" is.
+
+### One Image, One Job
+
+Each reference image serves one purpose: a layout reference does not fix colour,
+and a material reference does not fix typography. Mixing them is unfalsifiable.
+
+### Writing The Prompt
+
+State the need, subject, constraint, and prohibitions. Do not dictate technique;
+unhonourable technique language trades constraint for style drift.
+
+### Rendered Text
+
+Magnify and read any output lettering character by character. Generated text fails
+at small sizes first, and a thumbnail cannot show it.
+
+### Converging Adjustments
+
+Adjust one variable family per round — lighting, material, or composition. Parameters
+precede structure: structural change resets them. An unnamed "polish pass" ruins work.

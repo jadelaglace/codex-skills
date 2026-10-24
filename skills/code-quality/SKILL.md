@@ -2,7 +2,7 @@
 name: code-quality
 description: Implement or review code against adopted product, architecture, and design contracts; manage function and data correctness, naming, context lifecycles, errors, resources, unit tests, static checks, and code review. Use for code implementation, quality review, test gaps, or repair verification. Return code-level evidence upstream; do not replace architecture, visual, or final product acceptance.
 metadata:
-  version: "1.0.0"
+  version: "1.1.0"
 ---
 
 # 代码质量
@@ -40,11 +40,16 @@ observed defect is evidence first, not automatic permission to patch the build.
 
 ## Implement And Inspect
 
+Before writing, read affected files, callers, nearby naming, and applicable
+contracts. Reuse in-scope identifiers; check new names against existing symbols,
+routes, query keys, and storage keys.
 Keep the change focused and idiomatic to the existing language/framework. Review
 each changed function with meaningful logic, its inputs, outputs, side effects,
 and affected call sites. Review unchanged code only as needed to assess a real
 dependency or impact. Do not document every line or impose a repository-wide
 style migration to finish a bounded task.
+Keep renames and reformatting separate from behaviour changes; a diff that mixes
+them cannot be reviewed, and an unreviewable diff is where defects pass.
 
 - Name values and functions for their domain meaning; make units, identities,
   optionality, mutability, and ownership clear. A name such as `complete` needs
@@ -58,6 +63,9 @@ style migration to finish a bounded task.
 - Carry cancellation, deadline, identity, and resources through the operation's
   scope; prevent orphan work, stale writes, leaks, unbounded retry, and silent
   error conversion. Distinguish execution/request ctx from Agent working context.
+- Wire dependency-unavailable, context-loss, and exhausted-retry paths with the
+  happy path; an unused recovery hook is not recovery.
+- A long operation exposes throttled progress and a user-readable error state.
 - Implement the project's idempotency, versioning, transaction, and recovery
   semantics. Unchanged input, failed finalization, and unavailable dependencies
   must not fabricate revisions or false ready/success states.
@@ -65,13 +73,18 @@ style migration to finish a bounded task.
 Read [review-and-tests.md](references/review-and-tests.md) for substantial
 implementation, review of risky paths, or deciding test adequacy. Apply its
 relevant checks; it is not a demand to add every test category to every edit.
+Read [debugging.md](references/debugging.md) when a defect survives one careful
+reading of the code.
 
-If the contract cannot be implemented safely as written, return a concrete
-conflict and alternatives to architecture, design, or product. Do not silently
-relax accepted behavior, data authority, or quality gates.
+Return unimplementable or conflicting contracts upstream with the specific
+conflict and viable alternatives; raising one is within scope.
 
 ## Review, Test, Repair
 
+A case must be an executable assertion; otherwise return it upstream for
+restatement, not as a manual check.
+At minimum, test empty input, an extreme/boundary value, and a failing path;
+choose broader coverage by risk.
 Review the actual diff and relevant surrounding code separately from writing it.
 Check behavior, failure handling, boundary ownership, data invariants, and test
 assertions. Fresh review reasoning can reveal defects; writing and rereading
@@ -85,10 +98,15 @@ avoid mirror tests and unnecessary new tests for low-impact reversible edits.
 Choose applicable normal, invalid, boundary, timeout/cancellation, retry,
 concurrency, and recovery paths. Do not claim code coverage from a test count.
 
-Execute checks when available and authorized; record command, scope, build/input
-identity where relevant, and results. Label proposed/unrun cases explicitly.
+Execute authorized checks; record command, scope, build/input identity where
+relevant, and results; label unrun cases. Evidence includes an observable
+artifact, a clean run without unexplained warnings/errors, and changed metrics;
+a green log alone is not evidence.
 For environment failures, separate inability to run a gate from a passing gate.
 A mocked dependency cannot establish real external authorization or availability.
+
+Retiring assertions requires adding at least as many in the same batch; report a
+net decrease as a coverage change, not cleanup.
 
 For a defect, state expected versus observed behavior, trigger, impact, evidence,
 and affected contract. Repair authorized defects in a bounded set, verify the
@@ -96,6 +114,11 @@ regression and affected boundaries, then run the broader checks required by the
 blast radius or project workflow. In review-only mode, return these findings
 without edits. Do not weaken assertions, exclude the faulty path, swallow errors,
 or declare flaky behavior resolved merely to obtain a green result.
+
+Batches/releases require build identity, executed required cases, and results.
+Time pressure may change when gates run, not whether required gates run.
+Cross-process changes rerun end-to-end cases before commit; other gates keep
+their own triggers.
 
 Block code-quality passage on a violated required invariant, failed mandatory
 gate, unsupported required evidence, or an unresolved blocking review finding.
@@ -127,3 +150,6 @@ Code tests and review prove their covered mechanisms. Architecture owns
 functional-unit/integration acceptance, design owns applicable visual acceptance,
 and product owns overall outcome verification with the user's final acceptance.
 Keep those conclusions distinct.
+
+<!-- 2026-10-24: criteria adapted from a parallel-environment layered skill set;
+     project-specific bindings excluded. -->

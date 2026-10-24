@@ -69,3 +69,18 @@ and the project-required broader gates before return or promotion.
 These checks generalize Babata's asset admission, idempotent recollection,
 partial failures, integrity checks, and frozen-round discipline. They do not
 mandate Rust, SQLite, numbered data classes, or the project's exact commands.
+
+## Assertion Forms And The Minimum Edge Set
+
+When turning a case into an assertion, three forms cover most of it:
+
+- exit and status: the command or endpoint succeeded, with the expected code;
+- value comparison: a measured or returned value against a threshold, with the
+  tolerance stated;
+- structure: the required keys, fields, or elements exist and the prohibited ones
+  do not.
+
+Order the edge set the way failures actually happen: empty input, boundary or
+extreme value, failing dependency, then the normal path. Recording a case without
+its expected result is not a case; recording a result without the command that
+produced it is not evidence.

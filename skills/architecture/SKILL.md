@@ -2,7 +2,7 @@
 name: architecture
 description: Design or review software architecture, technology choices, functional units, interfaces, data ownership, non-functional targets, and test strategy; issue implementation contracts and verify returned functional-unit and integration evidence. Use for technical design, architecture review, or acceptance of implemented system boundaries. Product intent and final product acceptance remain upstream; code implementation and visual standards belong to their specialist workflows.
 metadata:
-  version: "1.0.0"
+  version: "1.1.0"
 ---
 
 # 架构工程
@@ -37,16 +37,24 @@ artifact; a full PRD is not a prerequisite for a bounded architecture question.
    boundaries. Reuse an adequate architecture; introduce a service, repository,
    protocol, or abstraction only for a demonstrated lifecycle, deployment,
    ownership, security, scale, or consumer need.
+   Keep domain rules independent of the host surface; swapping hosts must not reopen
+   the contract.
 2. Check proven existing APIs, exports, maintained tools, and local capabilities
    before designing custom adapters or protocols. Compare viable routes against actual constraints: target platform,
    ecosystem/tool availability, compatibility, cost, performance, security, and
    recovery. Record the chosen option and material tradeoffs at the existing
    architecture authority. Preserve credible alternatives when the decision is
    still open; do not manufacture an option catalogue for a small known fix.
+   Record why this route was chosen, what viable route was rejected and why, and
+   what happens if it fails.
 3. For each affected boundary, define responsibilities, allowed dependencies,
    input/output contracts, identities, permitted writers, invariants, error
    semantics, cancellation, and retry rules at the level the risk requires.
    Inspect external results at the owning boundary before admitting them.
+   Declare each dependency's failure order, fallback chain, and deterministic
+   behavior when exhausted. Paths that appear self-terminating (redirects, stream
+   closes, fire-and-forget) must explicitly end; otherwise a hang may surface only
+   as a distant timeout.
 4. Define applicable performance, reliability, security, observability, and
    recovery targets with a threshold, measurement
    conditions, and failure criterion. Use project requirements or measured
@@ -55,6 +63,8 @@ artifact; a full PRD is not a prerequisite for a bounded architecture question.
    contract -> case and expected result -> evidence -> return destination.
    Read [verification-and-data.md](references/verification-and-data.md) when
    designing a test matrix, data/recovery boundary, or returned-result gate.
+   Read [structure-and-topology.md](references/structure-and-topology.md) when the
+   design fixes storage, cross-service parameter names, or repository topology.
 6. Review the design for missing ownership, incompatible interfaces, untested
    failure paths, migration/recovery risk, and divergence from acceptance.
    Issue an implementation scope with contract references, permitted changes,
@@ -63,12 +73,14 @@ artifact; a full PRD is not a prerequisite for a bounded architecture question.
 Keep this handoff in existing documents or task output. A useful small form is:
 
 ```text
-Outcome and functional-unit scope
-Adopted contract/design versions and allowed changes
-Inputs, outputs, ownership, invariants, failure/recovery semantics
-Cases, expected results, applicable thresholds and evidence required
-Known limitations and return destination
+Goal and the single functional unit this ticket covers
+Files, modules, and boundaries in scope; explicit non-goals
+Acceptance cases with expected results and required evidence
+Dependency order and the contract versions this ticket relies on
+Return destination and blocking conditions
 ```
+A ticket covers one functional unit only; split it when scope spans another
+functional unit.
 
 For implementation within the authorized task, locate and read `code-quality`
 when available. Use `design-standards` when visual standards or actual visual
@@ -77,6 +89,11 @@ an agent, message another task, publish, or expand scope. If a specialist is
 missing, use available methods and identify any material verification gap.
 
 ## Receive And Verify Functional Units
+
+A returned unit uses one existing result state: passed, failed, partial, skipped,
+or blocked. For failure, list differences against original acceptance; for
+blocked, name the missing dependency. Append results without rewriting the
+original ticket.
 
 On return, reconcile the delivered scope, build/configuration identity, inputs,
 contract versions, changes, review findings, and evidence. Review the actual
@@ -97,6 +114,9 @@ product. Verify repairs against the affected cases and run the broader gates
 required by the impact. Within a frozen usage round, record observed defects
 without silently changing the build or contracts; follow the owning process
 for promotion to a repair round.
+
+When defects recur across returned units, distill generalized causes into an
+architecture note as authority; retain the individual tickets as evidence.
 
 Do not pass a required contract with failed or missing evidence. Keep the failed
 or blocked unit explicit while preserving unrelated successes. A limitation
@@ -119,3 +139,6 @@ Report what the implemented system can now do and under which conditions.
 Functional acceptance returns to `product-docs` when available; relevant visual
 results also return to design. Do not claim whole-product completion or user
 acceptance from this layer. Do not create a second product/status authority.
+
+<!-- 2026-10-24: criteria adapted from a parallel-environment layered skill set;
+     project-specific bindings excluded. -->
