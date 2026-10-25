@@ -1,0 +1,4 @@
+interface:
+  display_name: "调研报告"
+  short_description: "Orchestrate traceable research reports"
+  default_prompt: "Use $research-report to organize a research question, evidence, report draft, rendered delivery, and archive record."

@@ -1,0 +1,4 @@
+interface:
+  display_name: "报告渲染"
+  short_description: "Render HTML reports and verify PNG output"
+  default_prompt: "Use $report-render to render an existing HTML report into long or paginated PNGs and check the output."
