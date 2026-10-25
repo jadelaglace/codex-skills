@@ -2,18 +2,41 @@
 
 Personal Codex skills maintained by `jadelaglace`.
 
+<!-- workspace-recovery:start -->
+## Workspace recovery
+
+1. At a new session, compaction, or interrupted-task recovery, query the available Goal/task-state API first.
+2. Then read the [current plan](docs/skill-replication-plan.md) and reconcile its current item with the latest user instruction and Goal state.
+3. Preserve completed instruction instances; held follow-ups need their explicit resume condition. An ordinary synchronous command failure with intact context is handled locally, not as a full recovery.
+
+This block is a shallow entry point; the linked plan owns current progress.
+<!-- workspace-recovery:end -->
+
 ## Skills
 
-- `product-docs` (`1.0.3`): maintain product intent, acceptance, architecture, delivery status, and evidence without turning documentation governance into unnecessary ceremony.
+- `product-docs` (`1.0.4`): maintain product intent, acceptance, architecture, delivery status, and evidence without turning documentation governance into unnecessary ceremony.
 - `handoff-context` (`1.0.1`): create concise, evidence-backed stage handoffs that a new conversation can use to continue safely without replaying terminal work.
-- `architecture` (`1.0.0`): define technical contracts and verify functional-unit and integration evidence.
-- `code-quality` (`1.0.0`): implement and review code against adopted contracts, tests, and quality gates.
-- `design-standards` (`1.0.0`): create reusable design standards and verify actual rendered outputs.
+- `architecture` (`1.1.0`): define technical contracts and verify functional-unit and integration evidence.
+- `code-quality` (`1.1.0`): implement and review code against adopted contracts, tests, and quality gates.
+- `design-standards` (`1.1.0`): create reusable design standards and verify actual rendered outputs.
+- `report-render` (`1.0.0`): render existing HTML reports to long or paginated PNGs and record visual QC without changing report facts.
+- `research-report` (`1.1.0`): orchestrate traceable research from question and evidence through Markdown, adversarial review, rendered delivery, and archival.
+
+The screenshot-derived replication boundary and current validation status are recorded in
+[`docs/skill-replication-plan.md`](docs/skill-replication-plan.md). The two skills are
+portable workflow contracts; no source screenshot credentials, private endpoints, or
+project-specific scripts are included. They do not bundle renderer scripts or HTML
+templates, and their end-to-end research/rendering paths have not yet been proven.
+
+For the whole workspace, see the [conversation history, rules, and pitfalls](docs/workspace-history-and-rules.md).
+Detailed source, installation, and validation evidence is in
+[`docs/replication-evidence.md`](docs/replication-evidence.md). These records do not
+replace each Skill's own contract or authorize queued work.
 
 Skill versions are independent from repository release versions. Each Skill's
 `metadata.version` records that Skill's own public contract version. Repository
 publication tags use the date-based form `repo-YYYY.MM.DD` with a same-day
-revision suffix when needed, so this publication is `repo-2026.10.11`. This identifies the coordinated contents of
+revision suffix when needed; this publication is `repo-2026.10.25.1`. This identifies the coordinated contents of
 the repository and must not be interpreted as a Skill version. Historical
 numeric tags such as `1.0.0`–`1.0.2` are retained for compatibility and are not
 reused for new publications.

@@ -1,0 +1,33 @@
+{
+  "capturedAt": "2026-10-25",
+  "purpose": "S9 planning baseline; not a content backup and not authorization to edit or install",
+  "repository": "C:/Users/Aiano/codex-skills",
+  "head": "70c18bd9df346e0e3cd555f95c75350eb644e649",
+  "targetFiles": [
+    {
+      "role": "repository",
+      "path": "skills/product-docs/SKILL.md",
+      "sha256": "F08AC541A3A19B4B1AE68BA1A52A3BD4E07EAF3B57052F8B950CBDFF9CD1E608"
+    },
+    {
+      "role": "repository",
+      "path": "skills/product-docs/references/document-chain.md",
+      "sha256": "804F9147B29EC2F95450B3EF971B25DD19D2581F6923D4732B71F771D2889CFD"
+    },
+    {
+      "role": "installation",
+      "path": "C:/Users/Aiano/.agents/skills/product-docs/SKILL.md",
+      "sha256": "327EF8944E170A1C15BCDF192205C5103BF90584E0CF93F947E041E6B6F080BD"
+    },
+    {
+      "role": "installation",
+      "path": "C:/Users/Aiano/.agents/skills/product-docs/references/document-chain.md",
+      "sha256": "804F9147B29EC2F95450B3EF971B25DD19D2581F6923D4732B71F771D2889CFD"
+    }
+  ],
+  "externalReferences": {
+    "absorbPlanSha256": "FD3FA969109774EB0A81905864DA763E68905DDDE0EC85EAA5B3CD6C31D73F22",
+    "projectDocsSkillSha256": "4AEFEA3A75559F4C1BA58A04E6D3E20CD32D1A8AA0C38880291A09FDC24271CB"
+  },
+  "scope": "Plan and candidate-diff review only; no Skill, installation, external-source, Git, or GitHub mutation"
+}

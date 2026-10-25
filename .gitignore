@@ -1,0 +1,6 @@
+# Local validation/runtime artifacts must never enter the public skills repository.
+docs/validation/**/chrome-profile*/
+docs/validation/**/node_modules/
+docs/validation/**/dist/
+docs/validation/**/source/
+docs/validation/**/work/

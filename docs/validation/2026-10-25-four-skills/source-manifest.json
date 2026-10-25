@@ -1,0 +1,92 @@
+[
+  {
+    "Path": "source\\browser-extension\\manifest.json",
+    "SHA256": "7BB0F727A15A2323FE2513CBD6F04A1D685E302F59061DEB559F19F4F1AE7A3B",
+    "Bytes": 435
+  },
+  {
+    "Path": "source\\browser-extension\\package-lock.json",
+    "SHA256": "62390DC9B2D004C8EDAD151A9D58EB120FB2AC5E59CA2636E432AA61E3E19101",
+    "Bytes": 34070
+  },
+  {
+    "Path": "source\\browser-extension\\package.json",
+    "SHA256": "61C586E2433E5B2A34A4F3D906AA34CDE29CC02377EA7A0B2732BAA86E6CD045",
+    "Bytes": 491
+  },
+  {
+    "Path": "source\\browser-extension\\popup.css",
+    "SHA256": "F0DEADFAE213DD1BE5B4C8726571958682EDF18CD13A16A5DBFF1D4A2B00EA8C",
+    "Bytes": 3239
+  },
+  {
+    "Path": "source\\browser-extension\\popup.html",
+    "SHA256": "5D5F0C69AF16FF0EBCF1B6B396BC96D377BBD1BDB1076386C8FBE42465830585",
+    "Bytes": 2156
+  },
+  {
+    "Path": "source\\browser-extension\\src\\capture.test.ts",
+    "SHA256": "0AA1610DB4FDCA42CB8087E7733BD9C7D0D955FF88AA672B708BBAA0A2DC98F3",
+    "Bytes": 2533
+  },
+  {
+    "Path": "source\\browser-extension\\src\\capture.ts",
+    "SHA256": "0AF709B6E3B450163344ACB931EDC0F50DEDB9B9C73A6A7C0FB5A87750B7E21A",
+    "Bytes": 1848
+  },
+  {
+    "Path": "source\\browser-extension\\src\\index.ts",
+    "SHA256": "230A4A0E6D0E1FCE520B5DBB2C71FC9A8A7D25742D42C77DAC4CA5245FDC0DDE",
+    "Bytes": 258
+  },
+  {
+    "Path": "source\\browser-extension\\src\\popup.ts",
+    "SHA256": "C9C39A58278C9226BBFA6BF3D55BB935C59FE989EEEE9B626AB20FBA701722FC",
+    "Bytes": 12808
+  },
+  {
+    "Path": "source\\browser-extension\\src\\transport.ts",
+    "SHA256": "11D0223BEF56CF62C6A8CD35E5787758F74DFC77CA470D2BA3DF919488B0485D",
+    "Bytes": 2699
+  },
+  {
+    "Path": "source\\browser-extension\\src\\types.ts",
+    "SHA256": "D6548A347D7A3F1FDF5AB7E467B9E33D36F891AE96ADD7BF49530A549AAA914A",
+    "Bytes": 1400
+  },
+  {
+    "Path": "source\\browser-extension\\tsconfig.json",
+    "SHA256": "9A014C3796FC94A1C47E13BBFFE10A5812BCA82BEFBB6B9D7359902E8196FED5",
+    "Bytes": 227
+  },
+  {
+    "Path": "source\\compass-output\\docs\\00_REQUIREMENTS.md",
+    "SHA256": "E00F491214F67934D3EEF6B5AC7ADA70E6348EEA96CBAE6AACA73688F56C3593",
+    "Bytes": 5998
+  },
+  {
+    "Path": "source\\compass-output\\docs\\01_PRD.md",
+    "SHA256": "CE804725945422F2A2E112A1A89E9CC3DE6B67104E6CC54AE621E37914C9E4B3",
+    "Bytes": 6791
+  },
+  {
+    "Path": "source\\compass-output\\docs\\02_ACCEPTANCE_CRITERIA.md",
+    "SHA256": "426BDCB7630180052F77C0FEAD69976020374A28F1B613B4ADEC45D0464B7519",
+    "Bytes": 5480
+  },
+  {
+    "Path": "source\\compass-output\\docs\\03_ARCHITECTURE.md",
+    "SHA256": "9B8CD70BE45DA9621CAEB4F308C65DE30D0295B3E29B9442CAD8EE8B23D14DFA",
+    "Bytes": 7920
+  },
+  {
+    "Path": "source\\compass-output\\docs\\04_DEVELOPMENT_PROCESS.md",
+    "SHA256": "E01E7511E74C807D78C2CC585F38EEA5ADB45E71FA1F1B8CC6A07CEB532C6866",
+    "Bytes": 5449
+  },
+  {
+    "Path": "source\\compass-output\\docs\\05_TEST_CASES.md",
+    "SHA256": "CBE78E59BF58176D17118EDD084FB7A0901A9589ABCBBE1E4498CC150CD5EF8E",
+    "Bytes": 5846
+  }
+]

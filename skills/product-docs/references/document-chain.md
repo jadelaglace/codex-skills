@@ -64,6 +64,10 @@ requirements / intent
 - Store stable ownership and data boundaries in architecture.
 - Reference or summarize these facts elsewhere without competing editable
   copies, and make the update direction clear.
+- When an adopted decision changes interpreted current truth, update the owning
+  body in place instead of stacking corrective addenda. Preserve exact user
+  wording, adopted-decision history, and completion evidence in their existing
+  authorities; do not rewrite historical or still-effective material.
 - Keep independent dimensions such as authorization, completeness, processing,
   readiness, availability, and acceptance separate when they affect a decision.
 - Keep candidate proposals, experiments, machine suggestions, and adopted
@@ -167,6 +171,13 @@ and registry when filenames or ordering may change. Introduce an identifier,
 glossary, relationship diagram, or grouped naming convention only when it makes
 authority or navigation materially clearer. Follow a locally adopted numbering
 scheme; do not impose a universal numeric or alphabetic pattern.
+
+After changing document meaning, status, or navigation, inspect the affected
+live references for stale paths, section targets, and conflicting current
+claims. Repair actual drift; unchanged references need no edit. Preserve old
+names and claims in exact quotations and historical evidence with their source
+context; do not make them current by proximity. This check does not require a
+whole-repository audit, mechanical version bumps, or rewriting history.
 
 When renaming or moving authority documents:
 

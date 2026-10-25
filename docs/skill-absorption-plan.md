@@ -1,15 +1,58 @@
 # 四技能吸收计划（仓库正式执行计划）
 
-状态：`S0-completed / S1-completed / S2-completed / S3-completed / S4-completed / S5-completed / S6-completed / S7-completed`
+状态：`S0–S9-completed-with-limits / V1-completed-with-limits / publication-active`
 版本：`2026-10-24.plan.1`
 最后更新：2026-10-25
-当前范围：把截图来源中的可迁移判据吸收到现有 `architecture`、`code-quality`、
-`design-standards`；`product-docs` 本轮只保护、不修改。
-执行授权：用户于 2026-10-24 明确启动 S3，随后明确“继续下一步，严谨并自测”；本次执行 S6，范围为三个专业 Skill 的跨技能校验与版本升级。
-当前动作：S0（冻结基线、来源与工作区边界）、S1（持久备份和隔离）、S2（不落盘
+最新用户指令（2026-10-25，原话）：“开始下一步吧 仔细严谨 闭环掉”。
+本次 S9 授权：用户在 S8 完成报告之后再次明确“开始下一步吧 仔细严谨 闭环掉”。
+当前动作：`publication-active`；来源：`user-explicit-goal-start`；
+user-explicit-goal-start：用户明确“推进到闭环 严谨仔细 做好自测”，授权完成
+product-docs L1 后续的版本、安装同步、精确提交、GitHub push、日期标签与状态回读。
+Agent 临时子计划：对照九项延后裁决、现有 product-docs 及 references，逐项区分已有、
+增量、拒绝或继续延后；形成完整候选改法、验收、门禁及回滚方案。只写计划文档，
+不改 Skill、安装、版本或外部来源，不 commit/push/tag/Release，不重跑 S0–S8。
+验收入口：新 L1 计划、逐项裁决表、范围/链接/保护哈希和计划行为案例检查。
+当前子计划：已将 `product-docs` 从 `1.0.3` 升级为兼容 patch `1.0.4`，建立发布前备份，
+同步仓库变更到 `C:\Users\Aiano\.agents\skills`，排除验证缓存/浏览器 profile/node_modules
+等非公开产物，完成公开边界与全量校验，精确 commit 后 push、打新的日期仓库标签并回读
+GitHub issue/Release 状态。运行时搜索/渲染与用户接受仍保持证据缺口，不伪称已验证。
+L1 实施证据见 [S9 L1 检查](validation/2026-10-25-product-docs-l1/REVIEW.md)，
+发布前备份和实际结果将在同一报告追加；当前正在执行精确提交与 GitHub 回读。
+
+以下为 S8 已完成执行记录，不是当前动作：按上一轮 S7 终态接续 S8 本机同步；安装与自测已完成，
+恢复后只补终态回写，不重复安装或重跑已通过的测试。V1 按现有报告保留有界通过。
+S7 不重跑；本轮仅推进已授权的安装、版本与公开发布收口；运行时 Skill 验收与用户接受
+仍作为独立的 `pending_user_acceptance` 边界保留。
+当前范围：截图来源中的可迁移判据已吸收到现有 `architecture`、`code-quality`、
+`design-standards` 与 `product-docs`；本轮正在完成版本、安装和公开发布收口。
+执行授权：用户本次明确“开始下一步吧 仔细严谨 闭环掉”，范围为 S8 本机同步及文档收尾。
+S8 当时动作（已完成）：该阶段由用户明确“开始下一步吧 仔细严谨 闭环掉”，接续
+上一轮 S7 完成后的待执行项。来源：`user-explicit-goal-start`；
+user-explicit-goal-start：用户明确启动下一步，本次仅同步三个已提交的 `1.1.0` Skill
+到 `C:\Users\Aiano\.agents\skills`，同步前核对 S1 快照/现存文件集与备份完整性，
+同步后逐文件回读清单、大小、SHA256、版本、链接和格式；不启动 S9，不 push/tag/Release。
+V1 终态补写：工作区入口 `skill-replication-plan.md` 与
+[验证报告](validation/2026-10-25-four-skills/VALIDATION-REPORT.md) 均已证明该轮
+`completed with explicit evidence limits`；本次只回写终态，不重跑验证。设计层仍为
+初始静态画面/源级检查，未覆盖真实 Chrome API、交互、响应式或用户验收。
+此前 S0（冻结基线、来源与工作区边界）、S1（持久备份和隔离）、S2（不落盘
 diff 预览和 66 项唯一映射）、S3（吸收 architecture 判据）、S4（吸收 code-quality
 判据与调试方法）、S5（吸收 design-standards 视觉判据）与 S6（跨技能校验并升级到
-1.1.0）、S7（本地 review 与精确 commit）已完成；S8–S9 未启动。
+1.1.0）、S7（本地 review 与精确 commit）及 S8（本机同步）已完成；S9 未启动。
+
+S8 终态证据（2026-10-25）：源提交为 `70c18bd9df346e0e3cd555f95c75350eb644e649`；
+三个安装目录 `architecture`、`code-quality`、`design-standards` 均为 `1.1.0`。
+共 11 个文件：5 个更新、2 个新增、4 个不变，无删除；相对清单、大小及 SHA256
+与仓库一致。三项格式校验和 5 个本地链接通过；16 个 product-docs 仓库/安装保护文件
+校验保持不变。备份根目录为
+`C:\Users\Aiano\codex-skills-replicas\screenshot-lineage\absorb-backups\s8-20261025-083528`，
+含 `install/` 的 9 个原安装文件、`s8-before-manifest.json` 和
+`s8-after-manifest.json`（`sync-readback-passed`），两个新增文件记录为 absent-before。
+本地发布完成；本阶段未 commit、push、tag 或创建 Release。S9 保持
+`requires-explicit-resume`；不能据此声称 L1 吸收完成或真实交互验收完成。
+终态文档自检：README 与三份进度/历史文档共 4 文件，22 个本地链接目标存在，
+终态、版本、manifest 动作计数、备份路径和同步源提交一致；空白检查与
+`git diff --check` 通过（仅 LF/CRLF 提示）。只校验本次文档变更，未重复安装或技能测试。
 S4 临时子计划（2026-10-25）：只修改本计划已授权的三个 code-quality 文件，保留
 product-docs、architecture、design-standards、安装副本和既有工作区改动；独立 review
 发现预览 C12 的字面替换会删除既有幂等性、版本、事务和恢复语义，因此保留该既有
@@ -84,7 +127,7 @@ S2 preview-only，不授权 S3、源码写入、版本变更、安装、commit�
 
 - 仓库修改 7 个文件：3 个 `SKILL.md`、2 个新 references、2 个现有 references 追加；
 - 三个技能的 `metadata.version` 从 `1.0.0` 升为 `1.1.0`；
-- `product-docs` 保持 `1.0.3`，内容和 SHA256 不得变化；
+- `product-docs` 本轮由 `1.0.3` 升为兼容 patch `1.0.4`，仓库与安装副本需逐文件一致；
 - 不创建新 Skill，不修改截图原件，不修改外部计划，不自动安装、不 push、不打标签、不创建 GitHub Release；
 - 阶段 2 先生成不落盘 diff；只有用户明确确认 diff 后才允许写入；
 - 本地 commit 与本机安装同步是两个独立动作，均需单独回读证据。
@@ -101,8 +144,8 @@ S2 preview-only，不授权 S3、源码写入、版本变更、安装、commit�
 - [x] S5：#11 [吸收 S5：吸收 design-standards 视觉判据](https://github.com/jadelaglace/codex-skills/issues/11)
 - [x] S6：#12 [吸收 S6：跨技能校验并升级到 1.1.0](https://github.com/jadelaglace/codex-skills/issues/12)
 - [x] S7：#13 [吸收 S7：本地 review 与精确 commit](https://github.com/jadelaglace/codex-skills/issues/13)
-- [ ] S8：#14 [吸收 S8：同步三个 Skill 到本机 .agents](https://github.com/jadelaglace/codex-skills/issues/14)
-- [ ] S9：#15 [吸收 S9：建立 product-docs L1 延后轮计划](https://github.com/jadelaglace/codex-skills/issues/15)
+- [x] S8：#14 [吸收 S8：同步三个 Skill 到本机 .agents](https://github.com/jadelaglace/codex-skills/issues/14)
+- [x] S9：#15 [吸收 S9：建立 product-docs L1 延后轮计划](https://github.com/jadelaglace/codex-skills/issues/15)（L1 已实施；发布回读后关闭 issue）
 
 ## 1. 权威、状态和不可混淆的文件
 
@@ -556,12 +599,12 @@ L1 轮不能因为本轮 L2–L4 成功而自动开始，也不能把外部 `pro
 
 新 Agent 进入本任务时按以下顺序，不得直接执行：
 
-1. 查询 Goal/task-state；
-2. 读取本文件第 0、1、6、9、12 节；
-3. 读取外部计划第 0–3 节和对应目标文件的逐点终稿；
-4. 核对阶段 0 基线和当前 Git 状态；
-5. 如果没有用户对阶段 2 diff 的明确确认，停在 `plan-ready / not-executing`；
-6. 只有用户明确启动后，才建立备份并生成不落盘 diff。
+1. 查询 Goal/task-state，再按 README 恢复入口读取当前状态；
+2. 读取本文件顶部最新终态：S0–S8 已完成，不能按历史 1.0.0 基线重跑或重装；
+3. 没有新指令时当前槽为空，S9 保持 `requires-explicit-resume`；
+4. 用户明确启动 S9 后才按第 11 节建立 L1 专项计划，不直接改 product-docs；
+5. 仅为新授权范围读取外部计划及目标文件，核对最新 Git 状态与已保存证据；
+6. 新一轮修改仍须自己的基线、备份和 diff 门禁，不能把本轮的完成证据当作新授权。
 
 ## 14. 当前计划终态
 
@@ -579,9 +622,9 @@ L1 轮不能因为本轮 L2–L4 成功而自动开始，也不能把外部 `pro
   `design-standards/SKILL.md` 为
   `B8A27D0D355959211938A9BF9A46369F578586988F79FCE46D20E60E555DB354`；
   `code-quality/SKILL.md` 的 S4 变更及最终哈希见下方 S4 证据。
-- 本机 `C:\Users\Aiano\.agents\skills`：未修改；S1 快照中的 9 个安装文件逐一回读哈希一致，
+- S3/S4 当时的安装快照（历史，已由 S8 同步终态取代）：S1 中的 9 个安装文件逐一回读哈希一致，
   新 reference 仍按 `absent-before` 保持未同步。
-- Git：S7 已创建本地 commit `ab20612efb633792d8c182cd49cafcd184580ee5`（`docs: absorb layered skill criteria #absorb S7`）；未 push、未打标签。
+- Git：当前 S7 源提交为 `70c18bd9df346e0e3cd555f95c75350eb644e649`（`docs: absorb layered skill criteria #absorb S7`）；本阶段未 push、未打标签。先前记录的 `ab20612` 不是本次同步源。
 - S4 已完成：`skills/code-quality/SKILL.md` 吸收 C01–C13、A12、K07、G02、G06 判据，
   新增 `skills/code-quality/references/debugging.md`，并向
   `skills/code-quality/references/review-and-tests.md` 追加断言形式和最小边界集。
@@ -619,8 +662,8 @@ L1 轮不能因为本轮 L2–L4 成功而自动开始，也不能把外部 `pro
   `skills/report-render/`、`skills/research-report/` 等既有或无关工作区改动。提交前后通过
   `git diff --cached --check`、三个官方 `quick_validate.py`、本地链接、名称/版本、敏感扫描、
   staged 文件集合和 `product-docs` 保护哈希校验。提交后工作区仅保留上述未纳入文件的既有改动。
-- 本计划：S0–S7 已完成；S8–S9 未启动，后续阶段仍需单独授权并按门禁执行。
-- 版本号与 Git commit 已完成；安装同步、push、打标签和发布均未执行。
+- 本计划：S0–S8 已完成；S9 未启动，需用户明确继续建立 L1 计划。
+- 三个专业技能的版本升级、S7 本地 commit、S8 本地发布均已完成；本阶段未 push、打标签或创建 GitHub Release。
 
 初版预览 SHA256 为
 `05D4FE6CD7D965E7FD38504408F781170D1A3002D67685ABB1F1D1EE3CEB2A46`，初版
