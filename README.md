@@ -36,7 +36,7 @@ replace each Skill's own contract or authorize queued work.
 Skill versions are independent from repository release versions. Each Skill's
 `metadata.version` records that Skill's own public contract version. Repository
 publication tags use the date-based form `repo-YYYY.MM.DD` with a same-day
-revision suffix when needed; this publication is `repo-2026.10.25.1`. This identifies the coordinated contents of
+revision suffix when needed; this publication is `repo-2026.10.25.2`. This identifies the coordinated contents of
 the repository and must not be interpreted as a Skill version. Historical
 numeric tags such as `1.0.0`–`1.0.2` are retained for compatibility and are not
 reused for new publications.

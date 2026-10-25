@@ -210,8 +210,8 @@ dry-run、关键词检查或旧 Babata 测试当成新 Skill 行为已验证。
 ## 8. S9 收口与恢复入口
 
 规划终态及实际检查结果见[检查报告](validation/2026-10-25-product-docs-l1/REVIEW.md)。
-完成发布收口后，主计划当前项应回写为 `S9-publication-terminal-with-limits`；GitHub #15、
-阶段 issue #9–#15 应按实际执行证据关闭，不能先行勾选。安装与 GitHub 身份必须逐文件回读；
+完成发布收口后，主计划当前项已回写为 `S9-publication-terminal-with-limits`；GitHub #5、
+阶段 issue #9–#15 已按实际执行证据关闭。安装与 GitHub 身份已逐文件回读；
 运行时实战、外部搜索/渲染、真实用户接受仍不能因发布成功而自动完成。
 
 下次若要运行时实战或用户验收，必须有新的明确指令；恢复时先 Goal/task API → README 浅入口 →

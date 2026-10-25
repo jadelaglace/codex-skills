@@ -1,23 +1,24 @@
 # 四技能吸收计划（仓库正式执行计划）
 
-状态：`S0–S9-completed-with-limits / V1-completed-with-limits / publication-active`
+状态：`S0–S9-completed-with-limits / V1-completed-with-limits / publication-terminal-with-limits`
 版本：`2026-10-24.plan.1`
 最后更新：2026-10-25
 最新用户指令（2026-10-25，原话）：“开始下一步吧 仔细严谨 闭环掉”。
 本次 S9 授权：用户在 S8 完成报告之后再次明确“开始下一步吧 仔细严谨 闭环掉”。
-当前动作：`publication-active`；来源：`user-explicit-goal-start`；
+当前动作：`publication-terminal-with-limits`；来源：`user-explicit-goal-start`；
 user-explicit-goal-start：用户明确“推进到闭环 严谨仔细 做好自测”，授权完成
 product-docs L1 后续的版本、安装同步、精确提交、GitHub push、日期标签与状态回读。
 Agent 临时子计划：对照九项延后裁决、现有 product-docs 及 references，逐项区分已有、
 增量、拒绝或继续延后；形成完整候选改法、验收、门禁及回滚方案。只写计划文档，
 不改 Skill、安装、版本或外部来源，不 commit/push/tag/Release，不重跑 S0–S8。
 验收入口：新 L1 计划、逐项裁决表、范围/链接/保护哈希和计划行为案例检查。
-当前子计划：已将 `product-docs` 从 `1.0.3` 升级为兼容 patch `1.0.4`，建立发布前备份，
+终态：已将 `product-docs` 从 `1.0.3` 升级为兼容 patch `1.0.4`，建立发布前备份，
 同步仓库变更到 `C:\Users\Aiano\.agents\skills`，排除验证缓存/浏览器 profile/node_modules
 等非公开产物，完成公开边界与全量校验，精确 commit 后 push、打新的日期仓库标签并回读
 GitHub issue/Release 状态。运行时搜索/渲染与用户接受仍保持证据缺口，不伪称已验证。
 L1 实施证据见 [S9 L1 检查](validation/2026-10-25-product-docs-l1/REVIEW.md)，
-发布前备份和实际结果将在同一报告追加；当前正在执行精确提交与 GitHub 回读。
+发布前备份和实际结果已回读：精确提交 `ea254d2ed9d8e15a777dc55f07267049e7061cac`，
+GitHub `main` 已同步，日期标签 `repo-2026.10.25.1` 已推送，issue #5、#9–#15 已关闭。
 
 以下为 S8 已完成执行记录，不是当前动作：按上一轮 S7 终态接续 S8 本机同步；安装与自测已完成，
 恢复后只补终态回写，不重复安装或重跑已通过的测试。V1 按现有报告保留有界通过。
