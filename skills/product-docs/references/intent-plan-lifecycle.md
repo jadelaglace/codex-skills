@@ -33,6 +33,20 @@ pointer when that result changes the current user/delivery decision; do not turn
 usage into the full execution log. The active plan records the terminal
 conclusion and evidence entry, not another copy of either record.
 
+## Multi-Agent Coordination Guard
+
+When multiple Agents share a workspace, add a small coordination list beside
+the active plan rather than creating another authority. Each entry contains
+only `agent_id`, `scope`, and `status`; use a short workspace-local identifier
+independent of any platform, runtime, thread, or display name. With one Agent,
+skip only the list and continue through the current goal and active item. Before
+a mutation, read the list and stop if another Agent owns an overlapping scope;
+otherwise edit only the declared scope. This is a write-conflict guard, not a
+lock or tool protocol. Each execution branch gets a fresh opaque `agent_id`;
+recovery preserves it, while a fork/new parallel Agent must create a new one
+and never inherit the parent's claim. Read-only work needs no entry, and
+recovery never takes over another Agent's unfinished scope.
+
 ## First Capture
 
 Before backward search, analysis, implementation, or an older plan:
@@ -175,9 +189,10 @@ an ambiguous outcome, reconcile the affected external state first; rerun the
 full hook only when control/context or governing-task identity may also have
 been lost.
 
-Use an environment goal/task-state API when one exists. Do not infer the
+Read an available goal/task-state record when one exists. Do not infer the
 governing goal or terminal state from a compacted summary, last message, tool
-checkpoint, or most recent file touched when authoritative state is available.
+checkpoint, or most recent file touched when authoritative state is available;
+when no such record exists, use the repository's active plan.
 Repositories that rely on a deep active-plan authority should expose a compact,
 explicitly bounded root-level operational hook naming this order and linking
 that authority. Validate the order inside the bounded block (Goal/task-state API
@@ -190,8 +205,9 @@ Use marker-bounded checks rather than whole-file or exact-newline assumptions:
 
 1. Extract the bounded hook block; fail when its markers are missing or repeated.
 2. Normalize LF and CRLF for comparison inside the block.
-3. Require the goal/task-state API marker and the active-plan link, in that
-   order, within the same block.
+3. If a goal/task-state marker exists, require it and the active-plan link, in
+   that order, within the same block; otherwise validate the active-plan link
+   alone.
 4. Distinguish full recovery from ordinary synchronous failures with intact
    context; do not make every failed command restart recovery.
 5. Mutate the order and local-failure boundary in isolated copies and assert
@@ -202,7 +218,7 @@ Use marker-bounded checks rather than whole-file or exact-newline assumptions:
 Normal resume order:
 
 ```text
-environment-level thread/task goal, when available -> shallow recovery hook ->
+  available goal/task state, when present -> shallow recovery hook ->
 authoritative current active item -> authority index -> current intent ->
 requirements -> only the downstream authorities needed
 ```

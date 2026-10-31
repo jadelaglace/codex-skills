@@ -1,0 +1,4 @@
+interface:
+  display_name: "视觉质检"
+  short_description: "Gate matte and render output with measured alpha and background checks"
+  default_prompt: "Use $vision-qc to check this cutout for fringes, halo and stray pixels, and mark the defects."

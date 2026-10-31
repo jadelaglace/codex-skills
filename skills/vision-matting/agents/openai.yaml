@@ -1,0 +1,4 @@
+interface:
+  display_name: "视觉抠图"
+  short_description: "Cut out subjects, split layers, rescue shadows, wrap AI layering"
+  default_prompt: "Use $vision-matting to remove this background, key the screen, or split the subject into layers."

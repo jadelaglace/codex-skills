@@ -1,0 +1,4 @@
+interface:
+  display_name: "课程文档"
+  short_description: "Plan and check a course structure: lesson parts, causal line, no forward refs"
+  default_prompt: "Use $course-docs to outline this course and check the lesson structure."

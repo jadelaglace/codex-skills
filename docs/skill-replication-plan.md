@@ -154,3 +154,60 @@ Goal API 本轮返回 `goal: null`，无运行中 Goal。这里记录文档任�
 `docs/skill-absorption-plan.md` 作为四技能吸收的正式唯一执行计划。该计划已覆盖审核发现的
 路径、版本顺序、备份、安装差异、来源标记、回滚、66 项闭合和 L2–L4/L1 边界；静态检查通过。
 当时计划状态为 `plan-ready / not-executing`；此后 S0–S8 已依阶段授权完成，当前状态以本文顶部和吸收计划为准，不重放历史门禁。
+
+## 2026-10-31 终局：28 个技能全部去向已定
+
+本节为当前唯一执行结论，取代此前所有分批计划。证据在各自 Issue 的评论里，这里只记去向。
+
+### 一、已复刻并验证（10 个，均可本地复跑）
+
+| 技能 | Issue | 验证 |
+| --- | --- | --- |
+| vision-recognition | #20 | 格式校验、CV 度量、真实截图转写、多图对比、负路径 |
+| vision-matting | #44 | 五个子命令实测；合成 MAD 4.546；参数按 1028 版对齐 |
+| vision-qc | #45 | 四类夹具判定（pass / 光晕 / 杂点 / 空 alpha） |
+| comfyui-generate | #23 | 本地 stub 全链路 27/27，八类退出码 |
+| powershell | #34 | PS7 26 PASS / PS5.1 29 PASS |
+| git-workflow | #26 | 13/13，临时仓库真提交 |
+| llm-api | #29 | 38/38，reasoning 空回复与截断分类 |
+| gitea | #27 | 20/20 本地 stub，api 直通 + squash 合并 |
+| course-docs | #24 | 11/11 结构检查 |
+| server-ops | #42 | 16/16 探针（重复 header / 缺 charset / 5xx / HTML 套 JSON） |
+
+### 二、已吸收，不再单开技能（7 个）
+
+handoff-note(#28) → handoff-context；project-docs(#38) → product-docs；report-render(#40)；research-report(#41)；project-arch(#35) / project-design(#36) / project-dev(#37) → 方法论已在 product-docs / architecture / design-standards / code-quality，截图转写存 `docs/reference-transcripts/`。
+
+### 三、只识别不复刻、不注册（11 个）
+
+| 技能 | 原因 |
+| --- | --- |
+| q3-logger(#39) / ta-mgr(#43) / zijian-mgr(#47) / pet-vl(#33) | 科室内部流程与表结构 |
+| bug-filler(#22) | 飞书缺陷表 + 内网 CODING 链接 |
+| diworker(#25) | aic.byd.com 平台客户端 |
+| ops-release(#31) | 算力卡发布 runbook |
+| pet-pack(#32) | 卓宠资源表与产物格式 |
+| web-search(#46) | DiWorker API + byd-opensearch 两条内部通道 |
+| archive-vault(#21) | 用户指示不注册；转写存 `docs/reference-transcripts/archive-vault.md` |
+| lovart-gen(#30) | 无凭据且原文未给 HMAC 待签串规范；转写存 `docs/reference-transcripts/lovart-gen.md` |
+
+### 四、可迁移的五条结论
+
+1. 索引/配置是唯一真源，脚本不自带规则副本，换库只改索引。
+2. 干跑优先：入库、去重、批量改写默认只报告，显式 `--apply` 才动手。
+3. 去重三重保障：授权 + 同名同大小 + SHA256，产物进回收站而非删除。
+4. 内容相同但名字不同通常是两份合法副本，不合并。
+5. 签名/加密规范未知时不写客户端：猜出来的实现第一次真调就失败，属于假实现。
+
+### 五、证据边界（不夸大）
+
+- 所有复刻项的断言都在本地跑（stub 服务器或临时目录），**没有一个对真实内网服务验证过**；
+- gitea 证明的是协议正确，不证明 token 的 scope；
+- server-ops 的运维建议是知识，不是测试证明；
+- lovart-gen 与 archive-vault 只有文本转写，没有代码。
+
+### 六、未做的事（明确边界）
+
+- 未提交、未推送、未打 tag；
+- 未安装任何技能到 `.agents`（除 `llm-api` 外均为仓库内文件）；
+- `docs/reference-transcripts/` 下的 5 份转写是机器 OCR，含识别噪声，只作追溯。

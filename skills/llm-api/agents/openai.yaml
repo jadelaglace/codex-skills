@@ -1,0 +1,4 @@
+interface:
+  display_name: "LLM 调用"
+  short_description: "Call any OpenAI-compatible endpoint and diagnose empty or truncated replies"
+  default_prompt: "Use $llm-api to call this model and report empty, truncated or thinking-related failures honestly."

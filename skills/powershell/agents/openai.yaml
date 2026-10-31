@@ -1,0 +1,4 @@
+interface:
+  display_name: "PowerShell"
+  short_description: "Avoid the output, array and 5.1 encoding traps that survive review"
+  default_prompt: "Use $powershell to write or debug this script without the usual output, array and encoding traps."

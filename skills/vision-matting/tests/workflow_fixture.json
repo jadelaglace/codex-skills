@@ -1,0 +1,31 @@
+{
+  "1": {
+    "class_type": "LoadImage",
+    "inputs": {
+      "image": "{{IMAGE}}"
+    }
+  },
+  "2": {
+    "class_type": "CLIPTextEncode",
+    "inputs": {
+      "text": "{{PROMPT}}",
+      "clip": ["4", 0]
+    }
+  },
+  "3": {
+    "class_type": "LayeredSampler",
+    "inputs": {
+      "layers": "{{LAYERS}}",
+      "seed": "{{SEED}}",
+      "image": ["1", 0],
+      "positive": ["2", 0]
+    }
+  },
+  "4": {
+    "class_type": "SaveImage",
+    "inputs": {
+      "filename_prefix": "{{PREFIX}}",
+      "images": ["3", 0]
+    }
+  }
+}

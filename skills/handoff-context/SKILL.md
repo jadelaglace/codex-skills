@@ -4,7 +4,7 @@ description: >
   Create a concise but complete stage handoff that can be pasted into a new conversation so the next Agent can continue safely. Use when the user says “交接”, asks for a阶段性总结上下文, or asks for continuation-ready context. Preserve current authority, evidence, terminal states, unresolved items, and boundaries; do not invent work or restart completed work.
 metadata:
   short-description: "Generate continuation-ready handoff context"
-  version: "1.0.1"
+  version: "1.0.2"
 ---
 
 # Handoff Context
@@ -38,6 +38,24 @@ Treat recovery information as three cooperating layers:
 3. **Durable documents:** the project or process authority containing the active plan, progress, evidence, and hard boundaries. It may lag one terminal writeback.
 
 The handoff is a transport and locator, not a fourth authority layer. It must not override the current Goal or durable documents, and it cannot by itself authorize a mutation. In a new conversation, first reconcile the current Goal/task state and the active plan or progress authority; use the handoff to locate and interpret them.
+
+## Multi-agent protection
+
+With one Agent, skip only the coordination list; still follow the normal
+recovery path through the available goal state and the current active item.
+Only when multiple Agents share a workspace, use a short workspace-local
+`agent_id` and a small list beside the active plan containing `agent_id`,
+`scope`, and `status`. This is a write-conflict guard, not a fourth authority
+layer and not a lock or tool protocol. Before editing, read the list; if
+another Agent owns an overlapping scope, stop and report. Otherwise edit only
+the declared scope and mark it finished or blocked when done. Read-only work
+does not need an entry, and recovery never takes over another Agent's scope.
+
+Each execution branch gets a fresh opaque `agent_id` (for example,
+`agent-<unique-nonce>`). Compaction, handoff, or ordinary recovery preserves
+the same ID; a fork or newly parallel Agent must create a new ID and does not
+inherit the parent's scope claim. Check for an existing ID before writing; on
+collision or uncertain identity, stop and report.
 
 When selecting unfinished work after recovery, prefer the newest still-unfinished user instruction, then the started Goal, then the current executable durable-document item, then a paused Goal, then compacted recovery context or pre-compaction instructions. Lower-ranked context is locating evidence only until reconciled with a live authority.
 

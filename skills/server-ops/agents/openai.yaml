@@ -1,0 +1,4 @@
+interface:
+  display_name: "服务器运维"
+  short_description: "Triage remote services: probe first, then decide which layer failed"
+  default_prompt: "Use $server-ops to probe this service and work out whether the app, the proxy or the network is at fault."

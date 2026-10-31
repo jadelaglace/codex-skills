@@ -53,8 +53,9 @@ task action, not a promise to document later.
 At every full recovery boundary—new session, context loss or compaction,
 Agent/task handoff or interruption that may lose control/context, a long pause
 with uncertain execution state, or an explicit user instruction such as
-`continue`, `resume`, or `pick this back up`—first call an available
-goal/task-state API. An ordinary synchronous tool, command, or API failure that
+`continue`, `resume`, or `pick this back up`—first read any available
+goal/task-state record. If no such record exists, continue with the active plan.
+An ordinary synchronous tool, command, or API failure that
 returns a clear result while the current turn and governing task remain intact
 is not a full recovery boundary; handle or retry it locally. For an ambiguous
 stateful failure, reconcile the affected external state and rerun the full hook
@@ -85,6 +86,14 @@ durable documents. The live layer is newest but most vulnerable to compaction
 damage; the goal layer carries the short- or medium-term scope across sessions
 and may pause; documents preserve the same scope's durable state and hard
 boundaries but may lag one terminal writeback.
+
+When multiple Agents share a workspace, read a small workspace-local
+coordination list before mutation. It contains only `agent_id`, `scope`, and
+`status`; stop if another Agent owns an overlapping scope. This is a
+write-conflict guard, not a new authority, lock, or tool protocol. With one
+Agent, skip only the list and continue through the current goal and active
+item; read-only work does not need an entry. See
+`references/intent-plan-lifecycle.md` for handoff rules.
 
 Before selecting work, exclude instruction instances already proved terminal.
 Then select unfinished work in this closed order:
@@ -181,9 +190,9 @@ Before assessing, reporting, or editing:
    role.
 2. Check whether root-level local instructions or README expose a mandatory,
    explicitly bounded recovery-hook block to the active-plan authority. When
-   recovery safety matters and no shallow hook exists, add the smallest bounded
-   link-and-order hook that preserves the deeper document as the sole lifecycle
-   authority. Validate that Goal/task-state API occurs before the Active Plan
+  recovery safety matters and no shallow hook exists, add the smallest bounded
+  link-and-order hook that preserves the deeper document as the sole lifecycle
+  authority. Validate that any goal/task-state record is read before the Active Plan
    link inside the block, and add a mutation that reverses that order.
 3. Identify the lifecycle mode: discovery, definition, delivery,
    real-use/recovery, closure, or operations.

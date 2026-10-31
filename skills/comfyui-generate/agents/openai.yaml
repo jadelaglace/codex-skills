@@ -1,0 +1,4 @@
+interface:
+  display_name: "ComfyUI 执行"
+  short_description: "Run any ComfyUI API-format workflow: upload, submit, poll, download"
+  default_prompt: "Use $comfyui-generate to run this workflow on my ComfyUI server and download the outputs."

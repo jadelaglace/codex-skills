@@ -1,0 +1,4 @@
+interface:
+  display_name: "Git 工作流"
+  short_description: "Branch, commit, pre-push check and squash-merge without losing history"
+  default_prompt: "Use $git-workflow to branch, commit and prepare this change for review."

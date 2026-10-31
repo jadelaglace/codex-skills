@@ -1,0 +1,4 @@
+interface:
+  display_name: "视觉识别"
+  short_description: "Read and compare images with a vision model plus CV metrics"
+  default_prompt: "Use $vision-recognition to describe this image, extract its text, or compare it with another image."
